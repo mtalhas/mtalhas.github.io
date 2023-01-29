@@ -1,0 +1,770 @@
+<!doctype html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
+	<title>Muhammad Talha Siddiqui</title>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+		/* Utils */
+/*----- Colors -----*/
+/*----- Fonts -----*/
+/*----- Dimensions and sizes -----*/
+/* Base */
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Josefin Sans Light'), local('JosefinSans-Light'), url(https://fonts.gstatic.com/s/josefinsans/v9/C6HYlRF50SGJq1XyXj04zwV_pQ1T3xN3K1c3sB361us.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Josefin Sans Bold'), local('JosefinSans-Bold'), url(https://fonts.gstatic.com/s/josefinsans/v9/C6HYlRF50SGJq1XyXj04z306qf9KHRHwsVx7iw5MXmY.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v11/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/DvlFBScY1r-FMtZSYIYoYw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Lato Light Italic'), local('Lato-LightItalic'), url(https://fonts.gstatic.com/s/lato/v11/2HG_tEPiQ4Z6795cGfdivKCWcynf_cDxXwCLxiixG1c.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v11/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYEKCWcynf_cDxXwCLxiixG1c.ttf) format('truetype');
+}
+
+body {
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  background: #f8f8f8;
+  margin: 50px 0 100px;
+  letter-spacing: .3px;
+  color: #39424B; }
+
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
+  margin: 0; }
+
+h1 {
+  font-family: "Josefin Sans", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: 1px; }
+
+h2 {
+  font-family: "Josefin Sans", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: .5px; }
+
+h3 {
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: .4px; }
+  h3.bold {
+    font-weight: 700; }
+
+h4 {
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 12px; }
+  h4.bold {
+    font-weight: 700; }
+
+h5 {
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 11px; }
+  h5.italic {
+    font-style: italic; }
+
+h6 {
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 10px; }
+
+a {
+  color: inherit;
+  text-decoration: inherit; }
+  a:hover {
+    color: #2895F1; }
+  a .fa-external-link {
+    font-size: 10px;
+    vertical-align: text-top; }
+
+p,
+li {
+  font-size: 11px; }
+
+blockquote {
+  font-size: 11px;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  margin: 10px 25px; }
+
+em {
+  color: #999; }
+
+ul {
+  margin: 10px 0 0;
+  -webkit-padding-start: 25px; }
+  ul li {
+    padding-left: 10px; }
+  ul.minimal {
+    list-style: none;
+    padding: 0; }
+    ul.minimal li {
+      margin-bottom: 3px;
+      padding-left: 0; }
+  ul.two-column {
+    -webkit-column-count: 2;
+    -webkit-column-gap: 28px;
+    -moz-column-count: 2;
+         column-count: 2;
+    -moz-column-gap: 28px;
+         column-gap: 28px; }
+    ul.two-column li {
+      padding-left: 0; }
+
+@page {
+  size: A4; }
+
+.container {
+  padding-top: 20px; }
+
+.keyline {
+  width: 45px;
+  margin: 8px 0 10px;
+  border-top: 1px solid #56817A; }
+
+.pull-left {
+  float: left; }
+
+.pull-right {
+  float: right; }
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.profile-pic {
+  margin-top: -5px;
+  margin-right: 18px; }
+  .profile-pic img {
+    height: 52px;
+    width: 52px;
+    border-radius: 50%;
+    border: 2px solid #56817A; }
+
+.summary {
+  margin: 5px 0 5px; }
+
+/* Layouts */
+.page {
+  background: white;
+  width: 612px;
+  min-height: 792px;
+  display: block;
+  margin: 0 auto;
+  border-top: 10px solid #56817A;
+  padding: 36px 22px 30px 34px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5); }
+  .page:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.left-column {
+  float: left;
+  width: 160px;
+  margin-right: 20px;
+  word-wrap: break-word; }
+
+.right-column {
+  width: auto;
+  overflow: hidden; }
+
+.item {
+  margin-bottom: 15px; }
+  .item:last-child {
+    margin-bottom: 0; }
+
+@media print {
+  body {
+    margin: 0; }
+  .page {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 36px 0 30px;
+    box-shadow: none; }
+    .page .resume-header,
+    .page .resume-content {
+      padding: 0 22px 0 34px; }
+  .container {
+    page-break-inside: avoid; }
+  .work-container .item {
+    page-break-inside: avoid; }
+  .fa-external-link {
+    display: none; } }
+
+/* Components */
+.info-tag-container {
+  margin-bottom: 5px; }
+  .info-tag-container .fa {
+    font-size: 14px;
+    width: 12px;
+    margin-right: 5px;
+    text-align: center;
+    vertical-align: middle; }
+    .info-tag-container .fa.fa-map-marker {
+      font-size: 16px; }
+    .info-tag-container .fa.fa-mobile {
+      font-size: 18px; }
+    .info-tag-container .fa.fa-envelope-o {
+      font-size: 12px; }
+    .info-tag-container .fa.fa-desktop {
+      font-size: 11px; }
+    .info-tag-container .fa.fa-external-link {
+      width: auto;
+      font-size: inherit;
+      vertical-align: text-top; }
+  .info-tag-container .info-text {
+    font-size: 9px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 139px; }
+
+.references-container .fa {
+  font-size: 14px; }
+
+	</style>
+	</head>
+	<body>
+		<main id="resume" class="page">
+			<header class="resume-header clearfix">
+			    <div class="profile-header pull-left">
+			        <h1>Muhammad Talha Siddiqui</h1>
+			        <h2>Services Consultant</h2>
+			    </div>
+			    <div class="profile-pic pull-right">
+			        <img src="https://s.gravatar.com/avatar/e995c3c7d4395ab283924b105fc6f2a2?s&#x3D;400" alt="profile-pic">
+			    </div>
+			</header>
+			<div class="resume-content">
+				<aside class="left-column">
+					<div class="container about-container">
+					    <div class="title">
+					        <h3>About</h3>
+					        <div class="keyline"></div>
+					    </div>
+					        <div class="info-tag-container">
+					            <i class="fa fa-map-marker"></i>
+					        
+					                <h6 class="info-text">H-202, 2nd Floor, Chapal Super Luxury Apartments, Block-13, Gulistan-e-Johar, Karachi<br/>Karachi Pakistan 75290</h6>
+					        </div>
+					        <div class="info-tag-container">
+					            <i class="fa fa-envelope-o"></i>
+					        
+					                <h6 class="info-text">mtalha.dev@gmail.com</h6>
+					        </div>
+					        <div class="info-tag-container">
+					            <i class="fa fa-mobile"></i>
+					        
+					                <h6 class="info-text">(0092) 3122853636</h6>
+					        </div>
+					        <div class="info-tag-container">
+					            <i class="fa fa-desktop"></i>
+					        
+					                <h6 class="info-text">
+					                    <a href="https://www.linkedin.com/in/mtalhas/" target="_blank">
+					                        www.linkedin.com/in/mtalhas/ <i class="fa fa-external-link" aria-hidden="true"></i>
+					                    </a>
+					                </h6>
+					        </div>
+					                        <div class="info-tag-container">
+					                            <i class="fa fa-linkedin-square"></i>
+					                        
+					                                <h6 class="info-text">
+					                                    <a href="https://www.linkedin.com/in/mtalhas/" target="_blank">
+					                                        in/mtalhas <i class="fa fa-external-link" aria-hidden="true"></i>
+					                                    </a>
+					                                </h6>
+					                        </div>                         <div class="info-tag-container">
+					                             <i class="fa fa-github"></i>
+					                         
+					                                 <h6 class="info-text">
+					                                     <a href="https://github.com/mtalhas" target="_blank">
+					                                         mtalhas <i class="fa fa-external-link" aria-hidden="true"></i>
+					                                     </a>
+					                                 </h6>
+					                         </div></section>
+					    <div class="skills-container">
+					            <section class="container">
+					                    <div class="title">
+					                        <h3>Web Development</h3>
+					                        <div class="keyline"></div>
+					                    </div>                    <h4 class="bold">Expert</h4>
+					                    <ul class="minimal">
+					                            <li><h6>HTML</h6></li>
+					                            <li><h6>Javascript</h6></li>
+					                    </ul>
+					            </section>
+					            <section class="container">
+					                    <div class="title">
+					                        <h3>Software Architecture</h3>
+					                        <div class="keyline"></div>
+					                    </div>                    <h4 class="bold">Advanced</h4>
+					                    <ul class="minimal">
+					                            <li><h6>Design-patterns</h6></li>
+					                            <li><h6>Distributed systems</h6></li>
+					                            <li><h6>Scalability</h6></li>
+					                            <li><h6>Maintainability</h6></li>
+					                    </ul>
+					            </section>
+					            <section class="container">
+					                    <div class="title">
+					                        <h3>Software Development</h3>
+					                        <div class="keyline"></div>
+					                    </div>                    <h4 class="bold">Proficient</h4>
+					                    <ul class="minimal">
+					                            <li><h6>Sustainability</h6></li>
+					                            <li><h6>Portability</h6></li>
+					                            <li><h6>Scalability</h6></li>
+					                            <li><h6>Reasonability</h6></li>
+					                    </ul>
+					            </section>
+					            <section class="container">
+					                    <div class="title">
+					                        <h3>Problem Solving</h3>
+					                        <div class="keyline"></div>
+					                    </div>                    <h4 class="bold">Advanced</h4>
+					                    <ul class="minimal">
+					                            <li><h6>CompetitiveProgramming</h6></li>
+					                            <li><h6>Abstract</h6></li>
+					                    </ul>
+					            </section>
+					            <section class="container">
+					                    <div class="title">
+					                        <h3>Draft documentation</h3>
+					                        <div class="keyline"></div>
+					                    </div>                    <h4 class="bold">Proficient</h4>
+					                    <ul class="minimal">
+					                            <li><h6>docsify</h6></li>
+					                            <li><h6>Github</h6></li>
+					                            <li><h6>MARP</h6></li>
+					                            <li><h6>Joplin</h6></li>
+					                            <li><h6>MermaidJS</h6></li>
+					                            <li><h6>FormsIO</h6></li>
+					                    </ul>
+					            </section>
+					            <section class="container">
+					                    <div class="title">
+					                        <h3>Communication</h3>
+					                        <div class="keyline"></div>
+					                    </div>                    <h4 class="bold">Competent</h4>
+					                    <ul class="minimal">
+					                            <li><h6>face-2-face</h6></li>
+					                            <li><h6>emails</h6></li>
+					                            <li><h6>presentations</h6></li>
+					                            <li><h6>conference</h6></li>
+					                            <li><h6>buy-in talks</h6></li>
+					                            <li><h6>negotiations</h6></li>
+					                            <li><h6>layman conversions</h6></li>
+					                            <li><h6>1:1s</h6></li>
+					                    </ul>
+					            </section>
+					    </div>
+					    <div class="container languages-container">
+					        <div class="title">
+					            <h3>Languages</h3>
+					            <div class="keyline"></div>
+					        </div>
+					        <ul class="minimal">
+					                <li>
+					                    <h6>Urdu <em>(Native speaker)</em></h6>
+					                </li>
+					                <li>
+					                    <h6>English <em>(Fluent)</em></h6>
+					                </li>
+					        </ul>
+					    </div>
+					    <div class="container interests-container">
+					        <div class="title">
+					            <h3>Interests</h3>
+					            <div class="keyline"></div>
+					        </div>
+					            <section class="item">
+					                    <h4 class="bold">Home improvements &amp; engineering</h4>
+					                    <ul class="minimal">
+					                            <li>Plumbing</li>
+					                            <li>Electric-appliances</li>
+					                            <li>Civil engineering</li>
+					                    </ul>
+					            </section>
+					            <section class="item">
+					                    <h4 class="bold">Software based home solutions</h4>
+					                    <ul class="minimal">
+					                            <li>IoT</li>
+					                            <li>Home-server</li>
+					                            <li>plex</li>
+					                            <li>raspberry-pi</li>
+					                            <li>cups</li>
+					                            <li>saned</li>
+					                    </ul>
+					            </section>
+					            <section class="item">
+					                    <h4 class="bold">Watching documentaries</h4>
+					                    <ul class="minimal">
+					                            <li>Idiocracy</li>
+					                            <li>Lord-of-the-rings</li>
+					                            <li>movies</li>
+					                            <li>documentaries</li>
+					                    </ul>
+					            </section>
+					    </div>
+				</aside>
+				<div class="right-column">
+					        <div class="container summary-container">
+					            <div class="title">
+					                <h3>Summary</h3>
+					                <div class="keyline"></div>
+					            </div>            <p class="summary">
+					                A software enthusiast.&lt;br /&gt;&lt;br /&gt;I have been working as a developer for around a decade. During this time, I got a chance to visit various domains and technologies, which helped shape how I think and work now.&lt;br /&gt;&lt;br /&gt;I like to create software and help other developers like me around. I have recently been interested in making more layman talks than the geeky (development intensive). I believe everyone attached to a concept should have a right to completely and concisely understand it.&lt;br /&gt;&lt;br /&gt;Some recent technologies I have been working on are NodeJS, React, Docker, Kubernetes, Electron, and others. My main focus is on problem-solving, irrespective of the platform.
+					            </p>
+					        </div>
+					<div class="container work-container">
+					    <div class="title">
+					        <h3>Experience</h3>
+					        <div class="keyline"></div>
+					    </div>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        Agoda
+					                </h3>
+					                <h5 class="italic pull-right">
+					                        <span class="startDate">03/2022</span>
+					                        <span class="endDate"> - Present</span>
+					                </h5>
+					            </div>
+					            <h4>Software Engineering Manager</h4>
+					
+					            <p class="summary">Leading several teams, working on solutions based upon distributed computing to make the e-commerce scene under the global travel space alive</p>
+					
+					            <ul>
+					                <li>Working with teams to migrate long-running legacy systems to a newer and a better stack</li>
+					                <li>Keeping track of the learning abilities of my team so that they can progress in their respective careers and interests</li>
+					                <li>Having 1:1s to shape up the team culture and align them with essential matters at the organization</li>
+					                <li>Build a mindset and culture of quality first; Owning our stuff and converting them to quality artefacts and systems</li>
+					                <li>Help the organization envision what moving away from legacy could mean and preach the benefits within the team(s)</li>
+					                <li>Help the team understand Agility at work and take them through ceremonies; This helps the team give their best following sprints</li>
+					                <li>Making an effort around organizational values, so it lives within the team and work we do.</li>
+					            </ul>
+					        </section>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        Gaditek
+					                </h3>
+					                <h5 class="italic pull-right">
+					                        <span class="startDate">03/2021</span>
+					                        <span class="endDate"> - 03/2022</span>
+					                </h5>
+					            </div>
+					            <h4>Software Engineering Manager</h4>
+					
+					            <p class="summary">Provided leadership across the engineering organization for the aspects of hiring, processes, architecture, grooming individuals and solving complex problems</p>
+					
+					            <ul>
+					                <li>Introduced a hiring process and its custodianship (aka The Hiring Squad!)</li>
+					                <li>Enabled the eco-system of documentation keeping and taking tools along with helping the team to use them day-in-day-out</li>
+					                <li>Conducted 1:1s with team members to keep their inspirations and motivations up</li>
+					                <li>Helped to bootstrap various products for a quick test with the upcoming consumer markets for the organization</li>
+					                <li>Been a part of the team and the solution for complex problems like NotificationCenter, Auth provider selection and payment gateway solution</li>
+					                <li>Created and vocalized a process of hiring interns and turning them into fellow beings</li>
+					                <li>Led and represented the engineering department of the organization</li>
+					                <li>Proactively participated in converting an old-school organization to an organization with agility</li>
+					                <li>Helped and created career progression for various individuals in the organization</li>
+					                <li>Proactively involved me with HR to discuss and demystify challenging problems</li>
+					                <li>Introduced and have been the most potent catalyst in changing our product platform to be the cross-platform product</li>
+					                <li>Enabled ways to bring in new dimensions to the product evolution, which were held back because of the absence of engineering leadership</li>
+					                <li>Focus on quality deliverables -- Provided guidance to bring in an appropriate SDLC</li>
+					                <li>I got involved and got my hands dirty with architecture decisions at various organizational levels</li>
+					            </ul>
+					        </section>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        SEEK
+					                </h3>
+					                <h5 class="italic pull-right">
+					                        <span class="startDate">02/2020</span>
+					                        <span class="endDate"> - 03/2021</span>
+					                </h5>
+					            </div>
+					            <h4>Software Engineering Manager</h4>
+					
+					            <p class="summary">SEEK is a diverse group of companies that have a unified purpose to help people live more fulfilling and productive working lives and help organisations succeed.</p>
+					
+					            <ul>
+					                <li>Contributed to SEEKs overall product &amp; technology strategy and aligned systems with that strategy</li>
+					                <li>Ensured that systems were fit for purpose, well-architected and followed current SEEK development practices</li>
+					                <li>Maintained platform health by ensuring that our systems are secure, reliable, resilient and cost-effective</li>
+					                <li>Drove customer focus to ensure that we deliver excellent outcomes for our customers</li>
+					                <li>Commenced and maintained a high performing team culture that values collaboration, learning and continual improvement</li>
+					                <li>Acted as an enabler; Grew my team&#x27;s technical skills and leadership capabilities through coaching and mentoring. This involves having 1:1s with my teammates</li>
+					                <li>Lead by example, Which required me to get my hands dirty when needed</li>
+					                <li>Unblocked the team with whatever it took, having complete ownership of maintaining healthy teams</li>
+					                <li>Celebrated successes and learnt from the failures; propagated the culture through the teams and exemplified it for the rest of the organization</li>
+					                <li>Paired with the Principal Engineer of the team to understand the climate and the team&#x27;s problems</li>
+					                <li>Participated in and retro-ed the core hiring process through a centralized hiring squad</li>
+					                <li>Helped the org to move fast to the ecosystem of global products; Away from the local products which we have been dealing with for the past 25+ years</li>
+					            </ul>
+					        </section>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        SEEK
+					                </h3>
+					                <h5 class="italic pull-right">
+					                        <span class="startDate">05/2018</span>
+					                        <span class="endDate"> - 01/2020</span>
+					                </h5>
+					            </div>
+					            <h4>Lead Software Architect</h4>
+					
+					            <p class="summary">SEEK is a diverse group of companies that have a unified purpose to help people live more fulfilling and productive working lives and help organisations succeed.</p>
+					
+					            <ul>
+					                <li>Been the catalyst for transforming the organization</li>
+					                <li>Performed the duties as the JavaScript coach for the organization</li>
+					                <li>Advocated for and implemented software best practices</li>
+					                <li>Have been the communicator for various teams to maintain their health; sometimes preached the organization&#x27;s values</li>
+					                <li>Participated as a core in hiring new and experienced talents</li>
+					                <li>Propagated automation as a culture rather than an option</li>
+					                <li>Moved legacy code and data to cloud via lift &amp; shift, greenfield and brownfield methodologies</li>
+					                <li>Performed the duties of deciding and validating sensible defaults for the organization</li>
+					                <li>Pushed cloud-first approach in the org, living in an environment of Infra ops</li>
+					                <li>With the help of fellow architects, I invested time in a flourishing framework of single identity throughout SEEK systems; We did this through educating, enabling, and supporting the needful tools for the teams</li>
+					                <li>Created several SDKs for a single identity solution within Seek with complete automation and tests. Later helped teams adopt them into various systems</li>
+					            </ul>
+					        </section>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        Exact
+					                </h3>
+					                <h5 class="italic pull-right">
+					                        <span class="startDate">10/2016</span>
+					                        <span class="endDate"> - 01/2018</span>
+					                </h5>
+					            </div>
+					            <h4>Senior Software Engineer (Full-Stack)</h4>
+					
+					            <p class="summary">We are Exact. We make smart business software. We are entrepreneurial and dream big, just like you. We help and encourage anyone we work with to always be the best version of themselves.</p>
+					
+					            <ul>
+					                <li>Helped to come up with an end-to-end pipeline to build and release the product</li>
+					                <li>Performed various tasks, including coding, building, testing, releasing and debugging the product</li>
+					                <li>Made massive use of automation, including development and release cycles</li>
+					                <li>Helped to produce tools that are helpful during the lifecycle of the product. Usually as a need to support the development</li>
+					                <li>Helped POC the product initially with our customers to set up our product owner for the product&#x27;s success</li>
+					                <li>Created a framework single-handedly to help my fellow teammates with the needs of React Navigation and enable them to flourish their work distributedly and without flaws</li>
+					                <li>Created and open-sourced a library that behaves as a HOC for navigation matters around React space</li>
+					                <li>Created an in-house tool (based on ElectronJS) for various development teams that helps with the consumption of APIs without open API specs (legacy systems)</li>
+					            </ul>
+					        </section>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        Hexosys
+					                </h3>
+					                <h5 class="italic pull-right">
+					                        <span class="startDate">11/2015</span>
+					                        <span class="endDate"> - 10/2016</span>
+					                </h5>
+					            </div>
+					            <h4>Senior Software Engineer</h4>
+					
+					            <p class="summary">Accomplishing more than 150 main products as cutting-edge technology protocol/bus analyzers, reveals great ability of HexoSys to delivering new projects within the field of expertise with complete maturity and high competitive to the global high-tech market.</p>
+					
+					            <ul>
+					                <li>Helped in a complete overhaul and rewriting of parts of the Albaloo product</li>
+					                <li>Added the ability to target users through multi communication channels (SMS, emails, mobile notifications etc.)</li>
+					                <li>Helped product with identifying with and implementing the ability of geo fencing the ads in the current platform</li>
+					                <li>Introduced a custom framework on top of Laravel&#x27;s current implementation to support custom JavaScript loading in the layout</li>
+					                <li>Initialized and laid the basis for automation in the project, simplifying and making some tedious tasks process-oriented</li>
+					                <li>Helped teams with mocks to let them produce their artefacts accordingly. Later replaced with the accurate data bounded by the contracts</li>
+					                <li>Helped in versioning the APIs so that various teams in the organization consume their needed bits and are working harmoniously</li>
+					            </ul>
+					        </section>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        Experian
+					                </h3>
+					                <h5 class="italic pull-right">
+					                        <span class="startDate">07/2014</span>
+					                        <span class="endDate"> - 10/2015</span>
+					                </h5>
+					            </div>
+					            <h4>Senior Software Developer</h4>
+					
+					            <p class="summary">Accomplishing more than 150 main products as cutting-edge technology protocol/bus analyzers, reveals great ability of HexoSys to delivering new projects within the field of expertise with complete maturity and high competitive to the global high-tech market.</p>
+					
+					            <ul>
+					                <li>Assisted developers with a better approach to the problem at hand. I have to talk with my Team lead and the Architect to finalise a software architecture decision</li>
+					                <li>Primarily worked on the architectural aspects of the code, but I sometimes had the requirement to fix bugs and further minor changes</li>
+					                <li>Got myself certified with CITA-F to get relevant in the architecture escape and software practices</li>
+					                <li>Helped with adopting EHAB in various parts of our legacy application</li>
+					                <li>Debugged and fixed various system parts containing loads of stored procedures and complex SQL queries</li>
+					            </ul>
+					        </section>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        Pi-Labs
+					                </h3>
+					                <h5 class="italic pull-right">
+					                        <span class="startDate">06/2010</span>
+					                        <span class="endDate"> - 02/2014</span>
+					                </h5>
+					            </div>
+					            <h4>Chief Technology Officer</h4>
+					
+					            <p class="summary">Our passion for mobile software and our ability to deliver engaging solutions has given us much acclaim. Early adoption of Windows Phone 7 meant we were one of the first companies globally to have produced an app for the Microsoft Marketplace. Yet, our expertise encompasses the breadth of the smartphone ecosystems, including iOS, Android and Palm’s WebOS.</p>
+					
+					            <ul>
+					                <li>This was my earliest position as a technical leader, and I was going through significant learning</li>
+					                <li>Helped organization with various services-based projects; Dealt with multiple platforms and technologies</li>
+					                <li>Created, architected and maintained a homegrown idea that later shifted to become Garfield&#x27;s official game, Feed Garfield. The internal project name was Candy Pot. It was a team effort</li>
+					                <li>Created, architected and maintained an idea in collaboration with our partner. It was a video and audio processing app; These were early days when Snapchat didn&#x27;t exist; The project was named Gulf Talk</li>
+					                <li>Worked on an aggregator banking solution known as Mobank for UK based banks. Clients were able to control their various accounts through this app</li>
+					                <li>Pioneered the space of Windows 8 initial launching apps for Microsoft Singapore; some were CNA, DBS Bank Singapore, and The Straits Times Singapore</li>
+					                <li>Worked on various 2d and 3d games</li>
+					                <li>Used and improved the Cocos2dx platform to flourish 2d games on cross-platform technologies</li>
+					                <li>Written several frameworks myself and open-sourced them later to help the community; To mention some: EasyNDK-for-cocos2dx, Easy-CURL-for-PHP</li>
+					                <li>Gelled along with various individual contributors to help the organization meet its financial goal</li>
+					                <li>Presented learnings and findings at various university events and global technology events</li>
+					            </ul>
+					        </section>
+					</div>
+					<div class="container education-container">
+					    <div class="title">
+					        <h3>Education</h3>
+					        <div class="keyline"></div>
+					    </div>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        FAST - NUCES
+					                </h3>
+					                <h5 class="italic pull-right">
+					                        <span class="startDate">06/2006</span>
+					                        <span class="endDate"> - 07/2010</span>
+					                </h5>
+					            </div>
+					            <h4>Bachelor Computer Science</h4>
+					
+					
+					            <ul class="two-column">
+					                <li>Digital Logic Design</li>
+					                <li>Assembly Language</li>
+					                <li>Data Structures</li>
+					                <li>Design Patterns</li>
+					                <li>Web Programming</li>
+					                <li>Compiler Construction</li>
+					                <li>Concurrent and Distributed Systems</li>
+					                <li>High Performance Computing</li>
+					                <li>Database Design</li>
+					            </ul>
+					        </section>
+					</div>
+					<div class="container awards-container">
+					    <div class="title">
+					        <h3>Awards</h3>
+					        <div class="keyline"></div>
+					    </div>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        IASA IT Architecture Core (ITAC) – CITAF Certification
+					                </h3>
+					                <h5 class="italic pull-right">
+					                </h5>
+					            </div>
+					            <h5 class="awarder">Iasa Global</h5>
+					
+					            <p class="summary">Anchors to the beginning of Architect position and responsibilities</p>
+					        </section>
+					        <section class="item">
+					            <div class="section-header clearfix">
+					                <h3 class="bold pull-left">
+					                        Won the GIKI SOFTCOM 08 (Programming Competition)
+					                </h3>
+					                <h5 class="italic pull-right">
+					                </h5>
+					            </div>
+					            <h5 class="awarder">GIKI University Pakistan</h5>
+					
+					            <p class="summary">A speed programming competition of national level</p>
+					        </section>
+					</div>
+					<div class="container references-container">
+					    <div class="title">
+					        <h3>References</h3>
+					        <div class="keyline"></div>
+					    </div>
+					        <section class="item clearfix">
+					            <i class="fa fa-quote-left pull-left" aria-hidden="true"></i>
+					            <blockquote>
+					                Talha is surely missed by his team/peers and I think any company would find great benefit with the addition of Talha to their leadership and technical team. Wish you all the best Talha and hope our paths cross again.
+					            </blockquote>
+					
+					            <h5 class="pull-right"> — Heinrich Rust</h5>
+					        </section>
+					        <section class="item clearfix">
+					            <i class="fa fa-quote-left pull-left" aria-hidden="true"></i>
+					            <blockquote>
+					                As a colleague Talha is friendly, personable, has an easy manner and great sense of humour. A clear communicator with a voice for radio, Talha is wise head on young shoulders.
+					            </blockquote>
+					
+					            <h5 class="pull-right"> — Paul Fitzgerald</h5>
+					        </section>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
