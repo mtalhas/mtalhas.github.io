@@ -21,17 +21,17 @@ const lato = Lato({
 })
 
 export const metadata: Metadata = {
-  title: "M. Talha Siddiqui - Software Engineer",
-  description: "Experienced Software Engineer with expertise in architecting and implementing cutting-edge solutions across AI, cloud, and enterprise systems.",
-  keywords: ["Software Engineer", "DevOps", "API Management", "Azure", "Cloud Computing", "AI"],
+  title: "M. Talha Siddiqui - AI/ML Tech Lead | Solutions Architect",
+  description: "AI/LLM leader with over 10 years of experience in software engineering, cloud architecture, and enterprise systems. Building production-grade AI agents, RAG systems, and multi-agent orchestration solutions.",
+  keywords: ["AI", "LLM", "Machine Learning", "Solutions Architect", "Azure OpenAI", "RAG", "Multi-Agent", "Cloud Computing", "DevOps", "API Management"],
   authors: [{ name: "M. Talha Siddiqui", url: "https://mtalhas.github.io" }],
   creator: "M. Talha Siddiqui",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://mtalhas.github.io",
-    title: "M. Talha Siddiqui - Software Engineer",
-    description: "Experienced Software Engineer specializing in Azure AI Services, API Management, and Cloud Architecture",
+    title: "M. Talha Siddiqui - AI/ML Tech Lead | Solutions Architect",
+    description: "AI/LLM leader building production-grade AI agents, RAG systems, and multi-agent orchestration solutions across Azure, IBM watsonx, and open-source platforms.",
     siteName: "M. Talha Siddiqui Portfolio",
     images: [{
       url: "https://s.gravatar.com/avatar/e995c3c7d4395ab283924b105fc6f2a2?s=400",

@@ -39,7 +39,7 @@ export function Hero() {
                 M. Talha Siddiqui
               </h1>
               <h2 className="font-josefin text-xl sm:text-2xl lg:text-3xl font-light text-muted-foreground mt-2">
-                Manager, AI/LLM
+                AI/ML Tech Lead | Solutions Architect
               </h2>
             </motion.div>
 
