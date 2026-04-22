@@ -6,6 +6,11 @@ export interface SkillCategory {
 
 export const skillCategories: SkillCategory[] = [
   {
+    category: "AI & LLM",
+    level: "Advanced",
+    skills: ["Azure OpenAI", "RAG Systems", "Multi-Agent Orchestration", "Prompt Engineering", "IBM watsonx"],
+  },
+  {
     category: "Web Development",
     level: "Expert",
     skills: ["Python", "ASP.NET", "Javascript"],

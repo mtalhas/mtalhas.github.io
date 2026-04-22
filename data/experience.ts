@@ -11,9 +11,24 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     company: "Architecture In Motion Inc.",
+    position: "Manager, AI/LLM",
+    startDate: "09/2025",
+    endDate: "Present",
+    location: "Remote",
+    summary: "Leading AI agent development strategy and LLM platform evaluation for enterprise clients. Architecting intelligent solutions using Azure OpenAI, IBM watsonx, and open-source models to deliver production-grade AI systems.",
+    highlights: [
+      "Spearheading AI agent development and multi-agent orchestration strategies for enterprise deployments",
+      "Architecting RAG-based knowledge systems and conversational AI platforms using Azure OpenAI and open-source LLMs",
+      "Evaluating and integrating AI platforms including IBM watsonx Orchestrate, Azure AI Services, and cloud-native LLM tooling",
+      "Leading a development team on AI/LLM adoption, establishing best practices for prompt engineering, model evaluation, and responsible AI",
+      "Driving technical strategy for AI-powered products across cloud, DevOps, and enterprise integration domains",
+    ],
+  },
+  {
+    company: "Architecture In Motion Inc.",
     position: "Senior Devops Engineer",
     startDate: "08/2017",
-    endDate: "Present",
+    endDate: "08/2025",
     summary: "Successfully implemented API Management solutions, Azure AI Services and improved client satisfaction. Developed custom solutions, automated testing, and reduced system downtime.",
     highlights: [
       "Leading the architecture and implementation of a secure realtime chatbot solution using Azure AI Bot Service along with Azure Cognitive Services and OpenAI Services",

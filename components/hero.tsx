@@ -39,7 +39,7 @@ export function Hero() {
                 M. Talha Siddiqui
               </h1>
               <h2 className="font-josefin text-xl sm:text-2xl lg:text-3xl font-light text-muted-foreground mt-2">
-                Software Engineer
+                Manager, AI/LLM
               </h2>
             </motion.div>
 
@@ -49,7 +49,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-muted-foreground leading-relaxed max-w-2xl"
             >
-              I am an experienced Software Engineer with proven expertise in architecting and implementing cutting-edge solutions across AI, cloud, and enterprise systems. Demonstrated success in spearheading next-generation conversational AI platforms using Azure's advanced services while delivering enterprise-grade API solutions for finance and transportation sectors.
+              I am an AI/LLM leader with over 10 years of experience in software engineering, cloud architecture, and enterprise systems. Currently driving AI agent development and LLM platform strategy, with proven expertise in building production-grade conversational AI, RAG systems, and multi-agent orchestration solutions across Azure, IBM watsonx, and open-source platforms.
             </motion.p>
 
             <motion.div
