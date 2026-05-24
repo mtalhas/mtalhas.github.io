@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 import { Josefin_Sans, Lato } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -78,6 +79,13 @@ export default function RootLayout({
           <Toaster />
         </ThemeProvider>
         <Analytics />
+        <Script
+          src="/chatbot/chatbot.js"
+          strategy="lazyOnload"
+          data-chat-endpoint="https://func-mtalhas-chat-prod-fx.azurewebsites.net/api"
+          data-cal-15="https://cal.com/mtalhas/15min?utm_source=chatbot&utm_medium=site&utm_campaign=portfolio"
+          data-cal-30="https://cal.com/mtalhas/30min?utm_source=chatbot&utm_medium=site&utm_campaign=portfolio"
+        />
       </body>
     </html>
   )
