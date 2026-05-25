@@ -75,15 +75,9 @@
     });
     shadow.getElementById('close').addEventListener('click', closePanel);
 
-    // Render greeting on first open. If we have a returning visitor, warm-back.
-    const visitor = loadVisitor();
-    if (visitor && visitor.name) {
-      appendBot(`Welcome back, ${escapeHtml(visitor.name)}. Pick up where you left off?`);
-      renderChips([
-        { label: 'His projects', payload: 'tell me about his projects' },
-        { label: 'Book 15 min', action: 'open-booking', url: CONFIG.cal15 },
-      ]);
-    }
+    // Pre-warm the Azure Function so the user's first real message doesn't
+    // pay the cold-start tax. Fire-and-forget; we don't care about the result.
+    fetch(CONFIG.endpoint + '/health', { method: 'GET', mode: 'cors' }).catch(() => {});
   }
 
   // -------- UI primitives --------
@@ -190,11 +184,27 @@ form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #e5e7e
   function openPanel() {
     panel.classList.add('open');
     input.focus();
-    // First open: send empty message to fetch greeting.
-    if (log.children.length === 0 && !sessionId) {
-      sendToServer('');
+    // First open of this tab: render the greeting INSTANTLY client-side.
+    // No server roundtrip, no cold-start wait. The user's first real message
+    // is what hits the function (which by now has been pre-warmed via /health).
+    if (log.children.length === 0) {
+      const greeting = pickRandom([
+        "Hey! I'm Talha's site assistant. Ask anything about his work, or tap a topic below.",
+        "Hi there. I help visitors learn about Talha's work. What brings you here?",
+        "Hello. I can summarize Talha's projects, walk through his skills, or get you on his calendar. What are you after?",
+      ]);
+      appendBot(greeting);
+      renderChips([
+        { id: 'about.identity', label: 'About Talha', payload: 'tell me about talha' },
+        { id: 'projects.overview', label: 'His projects', payload: 'show me his projects' },
+        { id: 'skills.overview', label: 'His skills', payload: 'what are his skills' },
+        { id: 'booking.fifteen_min', label: 'Book 15 min', action: 'open-booking', url: CONFIG.cal15 },
+        { id: 'contact.email', label: 'Email Talha', payload: 'how do i email him' },
+      ]);
     }
   }
+
+  function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
   function closePanel() { panel.classList.remove('open'); }
 
