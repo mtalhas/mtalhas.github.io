@@ -112,9 +112,14 @@ button { font: inherit; cursor: pointer; }
 #panel.open { display: flex; }
 header { display: flex; align-items: center; justify-content: space-between;
   padding: 12px 16px; background: #1f2937; color: #fff; }
-header .title { font-weight: 600; font-size: 14px; }
-header .sub { font-size: 12px; opacity: 0.7; }
-header #close { background: transparent; border: none; color: #fff; font-size: 18px; padding: 0; }
+header .hdr-text { min-width: 0; }
+header .title { font-weight: 600; font-size: 14px; line-height: 1.2; display: flex; align-items: center; gap: 6px; }
+header .badge {
+  display: inline-block; font-size: 9.5px; font-weight: 600; letter-spacing: 0.04em;
+  padding: 1px 6px; border-radius: 8px; background: rgba(139, 92, 246, 0.25);
+  color: #ddd6fe; text-transform: uppercase; line-height: 1.5;
+}
+header #close { background: transparent; border: none; color: #fff; font-size: 18px; padding: 0; cursor: pointer; }
 #log { flex: 1; padding: 12px 16px; overflow-y: auto;
   font-size: 14px; line-height: 1.45; }
 .msg { margin: 0 0 10px; display: flex; flex-direction: column; max-width: 85%; }
@@ -156,7 +161,7 @@ form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #e5e7e
 }
 .privacy-note { font-size: 11px; color: #6b7280; padding: 4px 16px 0; }
 .footer-note { font-size: 10.5px; color: #6b7280; padding: 4px 16px 8px; border-top: 1px solid #f1f5f9; }
-header .sub { font-size: 11px; opacity: 0.75; }
+header .sub { font-size: 11.5px; opacity: 0.7; margin-top: 1px; }
 </style>
 
 <button id="bubble" aria-label="Open chat">
@@ -167,9 +172,9 @@ header .sub { font-size: 11px; opacity: 0.75; }
 
 <div id="panel" role="dialog" aria-label="Chat with Talha">
   <header>
-    <div>
-      <div class="title">Talha — site assistant</div>
-      <div class="sub">You're chatting with an AI assistant · Ask anything or book a call</div>
+    <div class="hdr-text">
+      <div class="title">Talha's site assistant <span class="badge">AI</span></div>
+      <div class="sub">Ask a question or book a call</div>
     </div>
     <button id="close" aria-label="Close">✕</button>
   </header>
@@ -182,7 +187,7 @@ header .sub { font-size: 11px; opacity: 0.75; }
     <input id="bot-check" name="bot_check" type="text" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
     <button id="send" type="submit">Send</button>
   </form>
-  <div class="footer-note">Privacy: your messages stay in this tab. Emails go only to Talha's inbox — no third-party CRM.</div>
+  <div class="footer-note">Privacy: messages stay in this tab. Emails go only to Talha's inbox. No third-party CRM.</div>
 </div>
     `;
   }
