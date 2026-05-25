@@ -80,20 +80,28 @@
     });
     shadow.getElementById('close').addEventListener('click', closePanel);
 
-    // Pre-warm: (a) /health wakes the function process, (b) a no-op /chat
-    // also forces the retriever (Hugot pipeline + KB index) to fully load.
-    // Without (b), the user's first real message still pays the ~1-2s
-    // model-warmup tax. Fire-and-forget both.
+    // No prewarm on mount. Visitors who bounce off the portfolio without
+    // opening the chat shouldn't make us spin Function instances. The
+    // prewarm fires on the FIRST bubble click instead (openPanel below).
+  }
+
+  let prewarmed = false;
+  function prewarmFunction() {
+    if (prewarmed) return;
+    prewarmed = true;
+    // (a) /health wakes the Function process.
+    // (b) no-op POST /chat forces the Hugot retriever + KB index to fully
+    //     load — without this, the user's first real message still pays
+    //     the ~1-2s model-warmup tax.
+    // Fire-and-forget; user shouldn't see the result.
     fetch(CONFIG.endpoint + '/health', { method: 'GET', mode: 'cors' }).catch(() => {});
     setTimeout(() => {
       fetch(CONFIG.endpoint + '/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // mountMs=0 means "skip the anti-bot floor"; empty msg returns
-        // the greeting (cheap) but loads the retriever as a side effect.
         body: JSON.stringify({ message: '', mountMs: 0, botCheck: '' }),
       }).catch(() => {});
-    }, 250);
+    }, 150);
   }
 
   // -------- UI primitives --------
@@ -223,9 +231,13 @@ header .sub { font-size: 11.5px; opacity: 0.7; margin-top: 1px; }
   function openPanel() {
     panel.classList.add('open');
     input.focus();
+    // Prewarm fires the moment the visitor shows chat intent. By the time
+    // they read the greeting + type a message (typically 5-15s), the
+    // Function should be warm. First message may still be cold-ish if
+    // the user types fast; subsequent messages will be warm.
+    prewarmFunction();
     // First open of this tab: render the greeting INSTANTLY client-side.
-    // No server roundtrip, no cold-start wait. The user's first real message
-    // is what hits the function (which by now has been pre-warmed via /health).
+    // No server roundtrip, no cold-start wait.
     if (log.children.length === 0) {
       const greeting = pickRandom([
         "Hey. Ask anything about Talha's work, or tap a topic below.",
