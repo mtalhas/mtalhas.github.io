@@ -209,6 +209,7 @@ header .sub { font-size: 11px; opacity: 0.75; }
         { id: 'projects.overview', label: 'His projects', payload: 'show me his projects' },
         { id: 'skills.overview', label: 'His skills', payload: 'what are his skills' },
         { id: 'booking.fifteen_min', label: 'Book 15 min', action: 'open-booking', url: CONFIG.cal15 },
+        { id: 'booking.thirty_min', label: 'Book 30 min', action: 'open-booking', url: CONFIG.cal30 },
         { id: 'contact.email', label: 'Email Talha', payload: 'how do i email him' },
       ]);
     }
