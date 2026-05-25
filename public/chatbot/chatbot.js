@@ -173,8 +173,8 @@ header .sub { font-size: 11.5px; opacity: 0.7; margin-top: 1px; }
 <div id="panel" role="dialog" aria-label="Chat with Talha">
   <header>
     <div class="hdr-text">
-      <div class="title">Talha's site assistant <span class="badge">AI</span></div>
-      <div class="sub">Ask a question or book a call</div>
+      <div class="title">Ask Talha <span class="badge">AI</span></div>
+      <div class="sub">Portfolio Q&amp;A and booking</div>
     </div>
     <button id="close" aria-label="Close">✕</button>
   </header>
