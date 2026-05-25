@@ -29,7 +29,7 @@
     cal15: SCRIPT.dataset.cal15 || 'https://cal.com/mtalhas/15min',
     cal30: SCRIPT.dataset.cal30 || 'https://cal.com/mtalhas/30min',
     bubbleLabel: SCRIPT.dataset.bubbleLabel || 'Chat with Talha',
-    coldStartMs: parseInt(SCRIPT.dataset.coldStartMs || '5000', 10),
+    coldStartMs: parseInt(SCRIPT.dataset.coldStartMs || '2000', 10),
     warmBackDays: 7,
   };
 
@@ -80,9 +80,20 @@
     });
     shadow.getElementById('close').addEventListener('click', closePanel);
 
-    // Pre-warm the Azure Function so the user's first real message doesn't
-    // pay the cold-start tax. Fire-and-forget; we don't care about the result.
+    // Pre-warm: (a) /health wakes the function process, (b) a no-op /chat
+    // also forces the retriever (Hugot pipeline + KB index) to fully load.
+    // Without (b), the user's first real message still pays the ~1-2s
+    // model-warmup tax. Fire-and-forget both.
     fetch(CONFIG.endpoint + '/health', { method: 'GET', mode: 'cors' }).catch(() => {});
+    setTimeout(() => {
+      fetch(CONFIG.endpoint + '/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        // mountMs=0 means "skip the anti-bot floor"; empty msg returns
+        // the greeting (cheap) but loads the retriever as a side effect.
+        body: JSON.stringify({ message: '', mountMs: 0, botCheck: '' }),
+      }).catch(() => {});
+    }, 250);
   }
 
   // -------- UI primitives --------
@@ -122,7 +133,7 @@ header .badge {
 header #close { background: transparent; border: none; color: #fff; font-size: 18px; padding: 0; cursor: pointer; }
 #log { flex: 1; padding: 12px 16px; overflow-y: auto;
   font-size: 14px; line-height: 1.45; }
-.msg { margin: 0 0 10px; display: flex; flex-direction: column; max-width: 85%; }
+.msg { margin: 0 0 14px; display: flex; flex-direction: column; max-width: 85%; }
 .msg.bot { align-self: flex-start; }
 .msg.user { align-self: flex-end; align-items: flex-end; }
 .bubble-text {
@@ -132,7 +143,20 @@ header #close { background: transparent; border: none; color: #fff; font-size: 1
 .msg.user .bubble-text { background: #2563eb; color: #fff; border-bottom-right-radius: 4px; }
 .msg.bot .bubble-text { border-bottom-left-radius: 4px; }
 .msg a { color: #2563eb; text-decoration: underline; }
-.chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 16px 0; }
+/* Typing indicator: three bouncing dots inside a bot bubble. Inserted
+   the moment the user hits Send, removed when the response arrives. */
+.msg.typing .bubble-text { padding: 10px 14px; display: inline-flex; gap: 4px; }
+.msg.typing .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #94a3b8;
+  animation: bot-typing 1.1s infinite ease-in-out;
+}
+.msg.typing .dot:nth-child(2) { animation-delay: 0.15s; }
+.msg.typing .dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes bot-typing {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-3px); opacity: 1; }
+}
 .chip {
   background: #fff; border: 1px solid #cbd5e1; color: #2563eb;
   padding: 6px 10px; border-radius: 16px; font-size: 12px;
@@ -366,21 +390,34 @@ header .sub { font-size: 11.5px; opacity: 0.7; margin-top: 1px; }
     }
   }
 
+  let typingNode = null;
+
   function showThinking() {
-    if (waitingTimer) return;
-    statusEl.textContent = 'thinking…';
+    // Animated bot bubble with three bouncing dots. Renders immediately on
+    // send so the user knows the bot heard them, even if the response is
+    // still 300-800ms away. Removed by clearThinking() when the response
+    // arrives.
+    if (typingNode) return;
+    typingNode = document.createElement('div');
+    typingNode.className = 'msg bot typing';
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble-text';
+    bubble.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+    typingNode.appendChild(bubble);
+    log.appendChild(typingNode);
+    log.scrollTop = log.scrollHeight;
+    // Cold-start fallback microcopy. Only fires if the response truly
+    // takes >2s (reduced from 5s so users see the explanation sooner).
     coldStartTimer = setTimeout(() => {
-      statusEl.textContent = 'still warming up, one sec…';
+      statusEl.textContent = 'warming up, one sec…';
     }, CONFIG.coldStartMs);
-    waitingTimer = setInterval(() => {
-      const dots = statusEl.textContent.endsWith('….') ? '…' : statusEl.textContent + '.';
-      // keep it lightweight; no-op refresh
-      void dots;
-    }, 600);
   }
 
   function clearThinking() {
-    if (waitingTimer) { clearInterval(waitingTimer); waitingTimer = null; }
+    if (typingNode && typingNode.parentNode) {
+      typingNode.parentNode.removeChild(typingNode);
+    }
+    typingNode = null;
     if (coldStartTimer) { clearTimeout(coldStartTimer); coldStartTimer = null; }
     statusEl.textContent = '';
   }
