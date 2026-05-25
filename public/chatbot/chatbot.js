@@ -204,9 +204,9 @@ header .sub { font-size: 11.5px; opacity: 0.7; margin-top: 1px; }
     // is what hits the function (which by now has been pre-warmed via /health).
     if (log.children.length === 0) {
       const greeting = pickRandom([
-        "Hey! I'm Talha's site assistant. Ask anything about his work, or tap a topic below.",
-        "Hi there. I help visitors learn about Talha's work. What brings you here?",
-        "Hello. I can summarize Talha's projects, walk through his skills, or get you on his calendar. What are you after?",
+        "Hey. Ask anything about Talha's work, or tap a topic below.",
+        "Hi there. What brings you here? I can summarize his work or get you on his calendar.",
+        "Hello. Projects, skills, or a quick call? Pick one or just type a question.",
       ]);
       appendBot(greeting);
       renderChips([
