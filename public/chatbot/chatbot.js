@@ -37,12 +37,16 @@
   const VISITOR_KEY = 'mtalhas_chat_visitor';
 
   // -------- State --------
-  let host, shadow, panel, bubble, log, input, sendBtn, statusEl, ctaBar;
+  let host, shadow, panel, bubble, log, input, sendBtn, statusEl, ctaBar, honeypot;
   let sessionId = sessionStorage.getItem(SESSION_KEY) || '';
   let waitingTimer = null;
   let coldStartTimer = null;
   let inFlight = false;
   let stickyCtaUrl = null;
+  // Anti-bot: widget mount timestamp; first user message before this
+  // delay elapses is treated as suspicious by the server. Real users
+  // can't read the greeting + type in <1.5s.
+  const mountTime = Date.now();
 
   // -------- Bootstrap --------
   if (document.readyState === 'loading') {
@@ -67,6 +71,7 @@
     sendBtn = shadow.getElementById('send');
     statusEl = shadow.getElementById('status');
     ctaBar = shadow.getElementById('cta-bar');
+    honeypot = shadow.getElementById('bot-check');
 
     bubble.addEventListener('click', togglePanel);
     sendBtn.addEventListener('click', onSubmit);
@@ -150,6 +155,8 @@ form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #e5e7e
   padding: 0 16px 6px; font-size: 12px; color: #6b7280; min-height: 18px;
 }
 .privacy-note { font-size: 11px; color: #6b7280; padding: 4px 16px 0; }
+.footer-note { font-size: 10.5px; color: #6b7280; padding: 4px 16px 8px; border-top: 1px solid #f1f5f9; }
+header .sub { font-size: 11px; opacity: 0.75; }
 </style>
 
 <button id="bubble" aria-label="Open chat">
@@ -162,7 +169,7 @@ form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #e5e7e
   <header>
     <div>
       <div class="title">Talha — site assistant</div>
-      <div class="sub">Ask anything or book a call</div>
+      <div class="sub">You're chatting with an AI assistant · Ask anything or book a call</div>
     </div>
     <button id="close" aria-label="Close">✕</button>
   </header>
@@ -171,8 +178,11 @@ form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #e5e7e
   <div id="cta-bar"></div>
   <form id="form" onsubmit="return false;">
     <input id="input" type="text" autocomplete="off" placeholder="Type a message…" maxlength="500">
+    <!-- honeypot: real users never see/touch this. Autofill bots will fill it. -->
+    <input id="bot-check" name="bot_check" type="text" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
     <button id="send" type="submit">Send</button>
   </form>
+  <div class="footer-note">Privacy: your messages stay in this tab. Emails go only to Talha's inbox — no third-party CRM.</div>
 </div>
     `;
   }
@@ -294,6 +304,10 @@ form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #e5e7e
 
     const body = { message };
     if (sessionId) body.sessionId = sessionId;
+    // Anti-bot: honeypot value (always empty for real users) + time
+    // since widget mount (real users take >1.5s to read+type).
+    body.botCheck = (honeypot && honeypot.value) || '';
+    body.mountMs = Date.now() - mountTime;
 
     try {
       const res = await fetch(CONFIG.endpoint + '/chat', {
