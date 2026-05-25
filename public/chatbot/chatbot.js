@@ -35,9 +35,18 @@
 
   const SESSION_KEY = 'mtalhas_chat_session';
   const VISITOR_KEY = 'mtalhas_chat_visitor';
+  const TEASER_KEY = 'mtalhas_chat_teaser_suppressed_until'; // unix ms
+
+  // Teaser config — when does the floating invite appear, when to dismiss.
+  const TEASER_COPY = 'Got a project? Ask away.';
+  const TEASER_DELAY_MS = 6000;     // 6s after page complete
+  const TEASER_AUTO_HIDE_MS = 25000; // 25s self-hide
+  const TEASER_MIN_WIDTH_PX = 640;   // hidden on mobile (WCAG 1.4.10/1.4.13)
+  const TEASER_DISMISS_DAYS = 7;     // X / Esc / auto-hide → 7d
+  const TEASER_OPENED_DAYS = 30;     // opened chat → 30d
 
   // -------- State --------
-  let host, shadow, panel, bubble, log, input, sendBtn, statusEl, ctaBar, honeypot;
+  let host, shadow, panel, bubble, log, input, sendBtn, statusEl, ctaBar, honeypot, teaser;
   let sessionId = sessionStorage.getItem(SESSION_KEY) || '';
   let waitingTimer = null;
   let coldStartTimer = null;
@@ -72,6 +81,8 @@
     statusEl = shadow.getElementById('status');
     ctaBar = shadow.getElementById('cta-bar');
     honeypot = shadow.getElementById('bot-check');
+    teaser = shadow.getElementById('teaser');
+    scheduleTeaser();
 
     bubble.addEventListener('click', togglePanel);
     sendBtn.addEventListener('click', onSubmit);
@@ -117,6 +128,40 @@ button { font: inherit; cursor: pointer; }
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 6px 20px rgba(0,0,0,0.25);
   transition: transform 150ms ease-out;
+}
+/* Teaser: floating invite to the left of the bubble */
+#teaser {
+  position: fixed; right: 92px; bottom: 32px;
+  max-width: 280px;
+  background: #fff; color: #111;
+  padding: 10px 30px 10px 14px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  font-size: 13.5px; line-height: 1.35;
+  border: 1px solid rgba(0,0,0,0.06);
+  display: flex; align-items: center;
+  opacity: 0; transform: translateX(8px);
+  transition: opacity 220ms ease-out, transform 220ms ease-out;
+  pointer-events: none;
+}
+#teaser.visible { opacity: 1; transform: translateX(0); pointer-events: auto; }
+#teaser::after {
+  content: ''; position: absolute; right: -6px; top: 50%;
+  width: 0; height: 0; transform: translateY(-50%) rotate(45deg);
+  background: #fff; border-right: 1px solid rgba(0,0,0,0.06);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  width: 12px; height: 12px;
+}
+#teaser-dismiss {
+  position: absolute; right: 6px; top: 6px;
+  background: transparent; border: none; color: #94a3b8;
+  font-size: 16px; line-height: 1; padding: 4px 6px;
+  cursor: pointer; border-radius: 4px;
+}
+#teaser-dismiss:hover { background: #f1f5f9; color: #475569; }
+@media (max-width: 639px) { #teaser { display: none !important; } }
+@media (prefers-reduced-motion: reduce) {
+  #teaser { transition: none; transform: none; }
 }
 #bubble:hover { transform: scale(1.08); }
 #bubble svg { width: 24px; height: 24px; }
@@ -196,6 +241,11 @@ form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid #e5e7e
 header .sub { font-size: 11.5px; opacity: 0.7; margin-top: 1px; }
 </style>
 
+<div id="teaser" role="status" aria-live="polite" aria-atomic="true" hidden>
+  <span id="teaser-text"></span>
+  <button id="teaser-dismiss" aria-label="Dismiss invite" title="Dismiss">×</button>
+</div>
+
 <button id="bubble" aria-label="Open chat">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
@@ -231,6 +281,10 @@ header .sub { font-size: 11.5px; opacity: 0.7; margin-top: 1px; }
   function openPanel() {
     panel.classList.add('open');
     input.focus();
+    // Opening the chat is a strong "not interested in the teaser
+    // anymore" signal — suppress for 30 days.
+    suppressTeaser(TEASER_OPENED_DAYS);
+    hideTeaser();
     // Prewarm fires the moment the visitor shows chat intent. By the time
     // they read the greeting + type a message (typically 5-15s), the
     // Function should be warm. First message may still be cold-ish if
@@ -257,6 +311,82 @@ header .sub { font-size: 11.5px; opacity: 0.7; margin-top: 1px; }
   }
 
   function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  // -------- Teaser --------
+  let teaserShownAt = 0;
+
+  function scheduleTeaser() {
+    if (window.innerWidth < TEASER_MIN_WIDTH_PX) return;
+    if (isTeaserSuppressed()) return;
+    const showWhenReady = () => setTimeout(showTeaser, TEASER_DELAY_MS);
+    if (document.readyState === 'complete') {
+      showWhenReady();
+    } else {
+      window.addEventListener('load', showWhenReady, { once: true });
+    }
+    // Esc key dismisses while visible.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && teaser.classList.contains('visible')) {
+        suppressTeaser(TEASER_DISMISS_DAYS);
+        hideTeaser();
+      }
+    });
+  }
+
+  function showTeaser() {
+    if (!teaser || isTeaserSuppressed()) return;
+    if (panel.classList.contains('open')) return; // chat already open
+    const span = shadow.getElementById('teaser-text');
+    if (span) span.textContent = TEASER_COPY;
+    teaser.hidden = false;
+    // Two-frame flicker to ensure CSS transition runs.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      teaser.classList.add('visible');
+    }));
+    teaserShownAt = Date.now();
+    // Auto-hide.
+    setTimeout(() => {
+      if (teaser.classList.contains('visible')) {
+        suppressTeaser(TEASER_DISMISS_DAYS);
+        hideTeaser();
+      }
+    }, TEASER_AUTO_HIDE_MS);
+    // Dismiss button.
+    const dismissBtn = shadow.getElementById('teaser-dismiss');
+    if (dismissBtn) {
+      dismissBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        suppressTeaser(TEASER_DISMISS_DAYS);
+        hideTeaser();
+      }, { once: true });
+    }
+    // Clicking the teaser body opens the chat (positive intent).
+    teaser.addEventListener('click', (e) => {
+      if (e.target.id === 'teaser-dismiss') return;
+      openPanel();
+    }, { once: true });
+  }
+
+  function hideTeaser() {
+    if (!teaser) return;
+    teaser.classList.remove('visible');
+    setTimeout(() => { if (teaser) teaser.hidden = true; }, 250);
+  }
+
+  function suppressTeaser(days) {
+    try {
+      const until = Date.now() + days * 24 * 60 * 60 * 1000;
+      localStorage.setItem(TEASER_KEY, String(until));
+    } catch (_) { /* localStorage blocked → in-tab suppression only */ }
+  }
+
+  function isTeaserSuppressed() {
+    try {
+      const v = localStorage.getItem(TEASER_KEY);
+      if (!v) return false;
+      return Date.now() < parseInt(v, 10);
+    } catch (_) { return false; }
+  }
 
   function closePanel() { panel.classList.remove('open'); }
 
