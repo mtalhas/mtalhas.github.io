@@ -1,0 +1,6 @@
+{
+  "version": "v1-PLACEHOLDER",
+  "updatedAt": "2026-05-27T00:00:00Z",
+  "note": "No CLI runs yet. The operator runs `polyjb compare` and commits the produced JSON here.",
+  "results": []
+}
