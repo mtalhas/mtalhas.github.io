@@ -1,0 +1,6 @@
+{
+  "$comment": "Flip a flag to true to enable that surface in production builds. b4McpHealthVisible requires E&O insurance per INSURANCE-REQUIRED.md.",
+  "b4McpHealthVisible": false,
+  "d3AzureAiWeatherVisible": true,
+  "i3PolyjbVisible": true
+}

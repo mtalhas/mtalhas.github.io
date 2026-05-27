@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import HealthRow from '../../components/HealthRow.astro';
+import data from '../../data/mcp-health.json';
+import { isEnabled } from '../../lib/shared/featureFlags';
+const enabled = isEnabled('b4McpHealthVisible');
+---
+<Base
+  title="MCP Server Health"
+  description="Public leaderboard of MCP server maintenance health. Deterministic scoring, vendors may submit corrections."
+>
+  <section class="container stack">
+    <p role="status" style="padding:0.75rem; border:1px solid var(--border); border-radius:8px;">
+      Methodology in beta. See the <a href="/tools/mcp-health/methodology/">methodology page</a>.
+    </p>
+    <h1>MCP Server Health</h1>
+    {!enabled && (
+      <p class="muted">
+        <strong>Preview only.</strong> This page is not linked from the hub grid yet. See <code>INSURANCE-REQUIRED.md</code> at the repo root for the gate.
+      </p>
+    )}
+    <p>Updated: {data.updatedAt}. Registry source: <code>{data.registrySource}</code>. <a href="/tools/mcp-health/methodology/">How the score is computed.</a></p>
+
+    <table aria-label="MCP server health table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Repo</th>
+          <th>Last commit</th>
+          <th>Open issues</th>
+          <th>Stars</th>
+          <th>Health (0-100)</th>
+          <th>Confidence</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.rows.map((r: any) => <HealthRow {...r} />)}
+      </tbody>
+    </table>
+
+    <p class="muted">
+      Data sourced from public APIs (Smithery.ai registry, GitHub public REST). Vendors may submit corrections via the per-row link.
+    </p>
+  </section>
+</Base>

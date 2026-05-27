@@ -1,20 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
 import ToolCard from '../components/ToolCard.astro';
+import { isEnabled } from '../lib/shared/featureFlags';
 
-const tools = [
-  { slug: 'sanitizer', name: 'Agent Trace Sanitizer',
+const allTools = [
+  { slug: 'sanitizer', name: 'Agent Trace Sanitizer', enabled: true,
     blurb: 'Paste an AI debug log. Strip secrets in your browser. Copy a clean issue body.' },
-  { slug: 'mcpmeter', name: 'MCPMeter',
-    blurb: 'Paste your claude_desktop_config.json. See per-server token cost per turn.' }
+  { slug: 'mcpmeter', name: 'MCPMeter', enabled: true,
+    blurb: 'Paste your claude_desktop_config.json. See per-server token cost per turn.' },
+  { slug: 'azureaiweather', name: 'Azure AI Weather', enabled: isEnabled('d3AzureAiWeatherVisible'),
+    blurb: 'Track every change to Azure AI services. Subscribe via RSS, Slack, or Web Push.' },
+  { slug: 'mcp-health', name: 'MCP Server Health', enabled: isEnabled('b4McpHealthVisible'),
+    blurb: 'Public leaderboard ranking MCP servers by maintenance health. Deterministic scoring.' },
+  { slug: 'polyjb', name: 'PolyJB', enabled: isEnabled('i3PolyjbVisible'),
+    blurb: 'Multilingual jailbreak corpus and CLI evaluator. Urdu, Arabic, Hindi, Bengali, Indonesian, Turkish.' }
 ];
+const tools = allTools.filter(t => t.enabled);
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
     { '@type': 'Question', name: 'Are these tools free?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Yes. They run entirely in your browser.' } },
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. Browser only tools run entirely in your browser. The Azure AI Weather backend runs in your own Azure tenant; you pay your own Azure bill.' } },
     { '@type': 'Question', name: 'Does any of my pasted content leave the browser?',
       acceptedAnswer: { '@type': 'Answer', text: 'No. The sanitizer and MCPMeter both process input locally with zero outbound network calls. The hub page does not collect analytics on tool routes.' } },
     { '@type': 'Question', name: 'Who built these?',
@@ -22,10 +30,10 @@ const faqJsonLd = {
   ]
 };
 ---
-<Base title="mtalhas tools" description="Browser only utilities for AI engineers: trace sanitizer and MCP token meter." jsonLd={faqJsonLd}>
+<Base title="mtalhas tools" description="Utilities for AI engineers: trace sanitizer, MCP token meter, Azure AI change tracker, multilingual jailbreak corpus." jsonLd={faqJsonLd}>
   <section class="container">
     <h1>mtalhas tools</h1>
-    <p>Browser only utilities for people shipping AI systems. No login. No telemetry on tool routes.</p>
+    <p>Utilities for people shipping AI systems. No login. Deterministic at runtime; no LLM in the path.</p>
     <div class="grid grid-tools" style="margin-top: 1.5rem;">
       {tools.map(t => <ToolCard slug={t.slug} name={t.name} blurb={t.blurb} />)}
     </div>

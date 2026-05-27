@@ -1,0 +1,10 @@
+{
+  "updatedAt": "2026-05-27T00:00:00Z",
+  "registrySource": "seed",
+  "note": "Hand-curated seed. Replaced daily by .github/workflows/mcp-health-ingest.yml.",
+  "rows": [
+    { "name": "@modelcontextprotocol/server-filesystem", "repo": "modelcontextprotocol/servers", "lastCommit": "2026-05-20", "openIssues": 18, "closedIssues": 92, "stars": 2200, "starsDelta30d": 110, "lastRelease": "2026-04-30", "composite": 0.78, "confidence": "high" },
+    { "name": "@modelcontextprotocol/server-github", "repo": "modelcontextprotocol/servers", "lastCommit": "2026-05-18", "openIssues": 22, "closedIssues": 88, "stars": 2200, "starsDelta30d": 110, "lastRelease": "2026-04-30", "composite": 0.76, "confidence": "high" },
+    { "name": "community-mcp-stub", "repo": "example/community-mcp-stub", "lastCommit": "2025-11-12", "openIssues": 0, "closedIssues": 0, "stars": 12, "starsDelta30d": 0, "lastRelease": null, "composite": 0.23, "confidence": "low" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "TABLES_CONNECTION": "UseDevelopmentStorage=true",
+    "VAPID_PUBLIC_KEY": "replace-with-your-vapid-public-key",
+    "VAPID_PRIVATE_KEY": "replace-with-your-vapid-private-key",
+    "VAPID_SUBJECT": "mailto:mtalha.dev@protonmail.com",
+    "SUBSCRIBE_RATE_LIMIT_PER_IP_PER_HOUR": "5"
+  }
+}

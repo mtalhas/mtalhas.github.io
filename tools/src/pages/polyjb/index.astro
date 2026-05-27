@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import snapshot from '../../data/polyjb-snapshot.json';
+
+const repoUrl = 'https://github.com/mtalhas/polyjb';
+const bibtex = `@misc{polyjb_v1_placeholder,
+  author       = {Siddiqui, Talha},
+  title        = {{PolyJB}: A Multilingual Prompt-Injection Corpus and Deterministic Evaluator (v1 PLACEHOLDER)},
+  year         = {2026},
+  howpublished = {\\url{https://github.com/mtalhas/polyjb}},
+  note         = {Pre-validation; do not cite as authoritative}
+}`;
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'Which languages does PolyJB cover?', acceptedAnswer: { '@type': 'Answer', text: 'Urdu, Arabic, Hindi, Bengali, Indonesian, Turkish. v1 contains 18 PLACEHOLDER prompts per language pending native validator review.' } },
+    { '@type': 'Question', name: 'Is the evaluator deterministic?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Refusal is decided by regex match against per-language refusal keywords. No LLM is asked to judge any output.' } },
+    { '@type': 'Question', name: 'Why are prompts marked PLACEHOLDER?', acceptedAnswer: { '@type': 'Answer', text: 'The v1 corpus was authored by a single contributor and has not yet been reviewed by paid native speakers. The CLI refuses to aggregate placeholder results without an explicit override flag.' } }
+  ]
+};
+---
+<Base title="PolyJB" description="Multilingual prompt-injection corpus and deterministic evaluator for Urdu, Arabic, Hindi, Bengali, Indonesian, Turkish." jsonLd={faqJsonLd}>
+  <section class="container stack">
+    <p role="status" style="padding:0.75rem; border:1px solid var(--border); border-radius:8px;">
+      <strong>v1 PLACEHOLDER status.</strong> The corpus has NOT yet been validated by native speakers. Do not cite as authoritative.
+    </p>
+
+    <h1>PolyJB</h1>
+    <p>A multilingual prompt-injection corpus and deterministic evaluator. Six languages: Urdu, Arabic, Hindi, Bengali, Indonesian, Turkish.</p>
+
+    <p>Source code and corpus: <a href={repoUrl} rel="noopener" target="_blank">{repoUrl}</a>. <a href="/tools/polyjb/methodology/">How the evaluator works.</a></p>
+
+    <h2>Why it exists</h2>
+    <p>Most published safety evaluations are English-first. PolyJB tests whether LLM refusal patterns survive non-English phrasings of the same exploit pattern. Author is a native Urdu speaker; native-speaker access to South Asian languages is the project's structural advantage.</p>
+
+    <h2>What it does NOT do</h2>
+    <ul>
+      <li>No LLM-as-judge. Evaluation is a regex match against per-language refusal keywords.</li>
+      <li>No specific harmful payloads. Prompts test refusal patterns, not the harm itself.</li>
+      <li>No claims of authority until validators have reviewed v1.</li>
+    </ul>
+
+    <h2>Latest results</h2>
+    {snapshot.results.length === 0
+      ? <p class="muted">{snapshot.note}</p>
+      : <pre><code>{JSON.stringify(snapshot.results, null, 2)}</code></pre>}
+
+    <h2>Cite this work</h2>
+    <p>Use the BibTeX entry below until v1 is validated and DOI-assigned via Zenodo.</p>
+    <pre><code>{bibtex}</code></pre>
+  </section>
+</Base>

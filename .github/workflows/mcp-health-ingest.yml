@@ -1,0 +1,40 @@
+name: MCP Health Ingest
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run ingest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/mcp-health/ingest.mjs
+
+      - name: Open PR with refreshed data
+        # Pinned to a 40-char SHA per CIS Hardening Guide for GitHub Actions.
+        # Bump via Dependabot or `pin-github-action`. SHA below = tag v6.
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c  # v6
+        with:
+          branch: data/mcp-health
+          base: main
+          commit-message: 'data(mcp-health): daily refresh'
+          title: 'data(mcp-health): daily refresh'
+          body: |
+            Automated daily refresh of `tools/src/data/mcp-health.json`.
+            Reviewer: confirm no drift > 20% on top entries before merge.
+          add-paths: tools/src/data/mcp-health.json
+          delete-branch: true

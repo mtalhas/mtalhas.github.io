@@ -1,0 +1,14 @@
+{
+  "$comment": "Fallback list used when the Smithery.ai API is unreachable. Hand-maintained. Add new public MCP servers here, one entry per line.",
+  "repos": [
+    { "name": "@modelcontextprotocol/server-filesystem", "repo": "modelcontextprotocol/servers" },
+    { "name": "@modelcontextprotocol/server-github",     "repo": "modelcontextprotocol/servers" },
+    { "name": "@modelcontextprotocol/server-slack",      "repo": "modelcontextprotocol/servers" },
+    { "name": "@modelcontextprotocol/server-postgres",   "repo": "modelcontextprotocol/servers" },
+    { "name": "@modelcontextprotocol/server-puppeteer",  "repo": "modelcontextprotocol/servers" },
+    { "name": "@modelcontextprotocol/server-memory",     "repo": "modelcontextprotocol/servers" },
+    { "name": "@modelcontextprotocol/server-fetch",      "repo": "modelcontextprotocol/servers" },
+    { "name": "@modelcontextprotocol/server-brave-search", "repo": "modelcontextprotocol/servers" },
+    { "name": "@modelcontextprotocol/server-sequential-thinking", "repo": "modelcontextprotocol/servers" }
+  ]
+}
