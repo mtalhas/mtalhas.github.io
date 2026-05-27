@@ -1,0 +1,33 @@
+---
+interface Props {
+  name: string;
+  repo: string;
+  composite: number;
+  confidence: 'high' | 'medium' | 'low';
+  openIssues?: number;
+  closedIssues?: number;
+  stars?: number;
+  lastCommit?: string | null;
+  lastRelease?: string | null;
+}
+const { name, repo, composite, confidence, openIssues, stars, lastCommit } = Astro.props;
+const pct = Math.round(composite * 100);
+const chipColor = confidence === 'high' ? '#173a26' : confidence === 'medium' ? '#3a2f17' : '#3a1717';
+const issueTitle = `Correction: ${name}`;
+const issueBody = `Vendor name: ${name}\nRepo: ${repo || 'unknown'}\nReason for correction: `;
+const correctionUrl = `https://github.com/mtalhas/mtalhas.github.io/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}`;
+---
+<tr data-test="row">
+  <th scope="row">{name}</th>
+  <td>{repo || 'unknown'}</td>
+  <td>{lastCommit ?? 'unknown'}</td>
+  <td>{openIssues ?? '?'}</td>
+  <td>{stars ?? '?'}</td>
+  <td>{pct}</td>
+  <td>
+    <span style={`padding:0.1rem 0.4rem;border-radius:6px;font-size:0.75rem;background:${chipColor};color:#e6e7eb;`}>{confidence}</span>
+  </td>
+  <td>
+    <a href={correctionUrl} rel="noopener" target="_blank">file correction</a>
+  </td>
+</tr>

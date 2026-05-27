@@ -1,0 +1,44 @@
+---
+import Base from '../../../layouts/Base.astro';
+---
+<Base
+  title="MCP Server Health: Methodology"
+  description="How the composite health score is computed. Deterministic, transparent, no LLM in the loop."
+>
+  <section class="container stack">
+    <h1>Methodology</h1>
+    <p>
+      The composite health score for an MCP server is a deterministic weighted sum of four normalized sub scores. No model judges anything.
+      Every input is a fact pulled from a public API.
+    </p>
+    <pre><code>{`composite = 0.4 * commit_recency
+          + 0.3 * issue_close_ratio
+          + 0.2 * stars_growth_30d
+          + 0.1 * release_recency`}</code></pre>
+    <ul>
+      <li><strong>commit_recency</strong>: <code>exp(-days_since_last_commit / 90)</code>, clamped to [0,1]. Half life is approximately 62 days.</li>
+      <li><strong>issue_close_ratio</strong>: <code>closed / (open + closed)</code>. Defaults to 0.5 when no issues exist (to avoid punishing brand new repos).</li>
+      <li><strong>stars_growth_30d</strong>: <code>stars_delta_30d / total_stars</code>, multiplied by 12 and clamped. 1.0 represents roughly 8.3% growth per month.</li>
+      <li><strong>release_recency</strong>: <code>exp(-days_since_release / 180)</code>. Defaults to 0.3 when no releases exist (mild penalty, not zero).</li>
+    </ul>
+
+    <h2>Right to respond</h2>
+    <p>Every row links to a pre populated correction issue. Vendor supplied corrections are reviewed and merged within five business days.</p>
+
+    <h2>Data sources</h2>
+    <ul>
+      <li>Smithery.ai public servers API. If unreachable, falls back to a hand maintained list at <code>scripts/mcp-health/known-repos.json</code>.</li>
+      <li>GitHub public REST API. No auth scopes beyond public read.</li>
+    </ul>
+
+    <h2>What we do NOT do</h2>
+    <ul>
+      <li>No LLM is asked to "rate" anything. The score is pure arithmetic.</li>
+      <li>No private heuristics. The formula and inputs are right here on this page.</li>
+      <li>No traffic data. We do not estimate user counts.</li>
+    </ul>
+
+    <h2>Refresh cadence</h2>
+    <p>The cron at <code>.github/workflows/mcp-health-ingest.yml</code> runs daily at 06:00 UTC. It opens a PR with the refreshed JSON; the PR is reviewed before merge so any drift over 20 percent on top entries gets a human look.</p>
+  </section>
+</Base>
