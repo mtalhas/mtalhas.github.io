@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+import snapshot from '../../data/azureaiweather-snapshot.json';
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'Is this hosted on my Azure tenant?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. The Function App, storage, and budget alarm live in the operator owned Azure tenant. No third party CRM.' } },
+    { '@type': 'Question', name: 'How often does it scan?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Every six hours. Sources: Azure Updates RSS, Azure Status RSS, Azure OpenAI region availability page, Foundry model cards, and the ARM modelCapacities endpoint.' } },
+    { '@type': 'Question', name: 'Does any LLM summarize the changes?',
+      acceptedAnswer: { '@type': 'Answer', text: 'No. Every published item is verbatim text from the source. No model is in the runtime path.' } }
+  ]
+};
+---
+<Base
+  title="Azure AI Weather"
+  description="Track every change to Azure AI services. Subscribe via RSS, Slack, or Web Push. Runs in your own Azure tenant."
+  jsonLd={faqJsonLd}
+>
+  <section class="container stack" data-island="azureaiweather">
+    <h1>Azure AI Weather</h1>
+    <p>Track every change to Azure AI services. Subscribe via RSS, Slack, or Web Push. Runs on your own Azure tenant. Deterministic text capture, no LLM in the path.</p>
+
+    <h2>Subscribe</h2>
+    <p class="muted">Replace <code>&lt;your-function-app&gt;</code> with your deployed Function App host. See <a href="https://github.com/mtalhas/mtalhas.github.io/blob/main/functions/azureaiweather/DEPLOY.md">DEPLOY.md</a>.</p>
+
+    <details>
+      <summary>RSS feed</summary>
+      <p>Add this URL to your feed reader:</p>
+      <p><code>https://&lt;your-function-app&gt;.azurewebsites.net/api/feed.rss</code></p>
+    </details>
+
+    <details>
+      <summary>Slack webhook</summary>
+      <form data-test="slack-form" onsubmit="return false">
+        <label for="slack-url">Slack webhook URL</label>
+        <input id="slack-url" type="url" data-test="slack-url" required style="width:100%" placeholder="https://hooks.slack.com/services/..." />
+        <p>
+          <button class="cta" data-test="slack-subscribe">Validate &amp; copy curl</button>
+        </p>
+        <p role="status" aria-live="polite" data-test="slack-status" class="muted"></p>
+      </form>
+    </details>
+
+    <details>
+      <summary>Web Push</summary>
+      <p>Click the button below to opt in. The browser will register against your Function App once deployed.</p>
+      <button class="cta" data-test="webpush-optin">Enable browser notifications</button>
+      <p role="status" aria-live="polite" data-test="webpush-status" class="muted"></p>
+    </details>
+
+    <h2>Last 7 days</h2>
+    {snapshot.items.length === 0
+      ? <p class="muted">{snapshot.note}</p>
+      : <ul>{snapshot.items.map((it: any) => <li><strong>{it.title}</strong><br /><span class="muted">{it.publishedAt}</span></li>)}</ul>}
+  </section>
+
+  <script>
+    import { validateSlackWebhook } from '../../lib/azureaiweather/slackUrl';
+    const form = document.querySelector('[data-test=slack-form]') as HTMLFormElement | null;
+    if (form) {
+      const btn = form.querySelector('[data-test=slack-subscribe]') as HTMLButtonElement;
+      btn.addEventListener('click', async () => {
+        const input = form.querySelector('[data-test=slack-url]') as HTMLInputElement;
+        const status = form.querySelector('[data-test=slack-status]') as HTMLElement;
+        const v = validateSlackWebhook(input.value);
+        if (!v.ok) { status.textContent = `Rejected: ${v.reason}`; return; }
+        const cmd = `curl -X POST https://<your-function-app>.azurewebsites.net/api/subscribe -H 'content-type: application/json' -d '${JSON.stringify({ channel: 'slack', endpoint: input.value })}'`;
+        try { await navigator.clipboard.writeText(cmd); status.textContent = 'Validated. curl command copied to clipboard. Run it from your terminal once the Function App is deployed.'; }
+        catch { status.textContent = `Validated. Run this from your terminal: ${cmd}`; }
+      });
+    }
+    const optBtn = document.querySelector('[data-test=webpush-optin]');
+    if (optBtn) optBtn.addEventListener('click', () => {
+      const status = document.querySelector('[data-test=webpush-status]') as HTMLElement;
+      if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+        status.textContent = 'Web Push not supported in this browser.';
+        return;
+      }
+      status.textContent = 'Web Push is supported. Subscription endpoint will register against your Function App once deployed.';
+    });
+  </script>
+</Base>
