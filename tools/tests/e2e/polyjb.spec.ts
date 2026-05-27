@@ -16,7 +16,7 @@ test.describe('I3 PolyJB', () => {
   test('methodology page describes deterministic evaluation', async ({ page }) => {
     await page.goto('/tools/polyjb/methodology/');
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/Methodology/);
-    await expect(page.locator('h2')).toContainText(/Why not LLM-as-judge/);
+    await expect(page.getByRole('heading', { name: /Why not LLM-as-judge/i })).toBeVisible();
   });
 
   test('passes axe a11y scan', async ({ page }) => {
