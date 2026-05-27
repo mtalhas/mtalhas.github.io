@@ -1,0 +1,10 @@
+---
+interface Props { slug: string; name: string; blurb: string; }
+const { slug, name, blurb } = Astro.props;
+const href = `/tools/${slug}/`;
+---
+<article class="card">
+  <h2 style="margin-top:0">{name}</h2>
+  <p>{blurb}</p>
+  <a class="cta" href={href} aria-label={`Open ${name}`}>Open {name}</a>
+</article>
