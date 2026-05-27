@@ -1,0 +1,14 @@
+{
+  "prose": [
+    "The sky is blue and the regex pack should leave this untouched.",
+    "We compared options A and B; B won on latency.",
+    "Cost rose from 1.2K to 1.8K tokens per turn."
+  ],
+  "lookalikeKeys": [
+    "skiing-trip",
+    "pkg_install",
+    "ghpages",
+    "shortAKIA",
+    "patient_zero"
+  ]
+}
