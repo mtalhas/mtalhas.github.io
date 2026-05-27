@@ -1,0 +1,15 @@
+{
+  "updated": "2026-05-27",
+  "note": "Hand-curated estimates from list_tools responses of popular MCP servers. Token counts are approximate input-side overhead per turn including tool definitions and JSON schemas. Refresh by running the server once and counting.",
+  "servers": {
+    "@modelcontextprotocol/server-filesystem": { "toolCount":  6, "approxTokens": 1400, "confidence": "high" },
+    "@modelcontextprotocol/server-github":     { "toolCount": 26, "approxTokens": 5800, "confidence": "high" },
+    "@modelcontextprotocol/server-slack":      { "toolCount":  8, "approxTokens": 1900, "confidence": "high" },
+    "@modelcontextprotocol/server-postgres":   { "toolCount":  3, "approxTokens":  600, "confidence": "high" },
+    "@modelcontextprotocol/server-puppeteer":  { "toolCount":  7, "approxTokens": 1700, "confidence": "medium" },
+    "@modelcontextprotocol/server-memory":     { "toolCount":  9, "approxTokens": 1400, "confidence": "high" },
+    "@modelcontextprotocol/server-fetch":      { "toolCount":  1, "approxTokens":  250, "confidence": "high" },
+    "@modelcontextprotocol/server-brave-search": { "toolCount": 2, "approxTokens": 500, "confidence": "high" },
+    "@modelcontextprotocol/server-sequential-thinking": { "toolCount": 1, "approxTokens": 300, "confidence": "high" }
+  }
+}

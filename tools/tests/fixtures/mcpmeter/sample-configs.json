@@ -1,0 +1,15 @@
+{
+  "claudeDesktopShape": {
+    "mcpServers": {
+      "filesystem": { "command": "npx", "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/me"] },
+      "github":     { "command": "npx", "args": ["-y", "@modelcontextprotocol/server-github"], "env": { "GITHUB_TOKEN": "fake" } }
+    }
+  },
+  "genericListShape": {
+    "servers": [
+      { "name": "search",     "tools": [{ "name": "web_search", "description": "Search the web for a query.", "schema": "{\"type\":\"object\"}" }] },
+      { "name": "calculator", "tools": [{ "name": "add", "description": "Add two numbers.", "schema": "{}" }] }
+    ]
+  },
+  "malformed": "{ this is not JSON"
+}
