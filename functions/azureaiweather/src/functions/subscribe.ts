@@ -1,5 +1,6 @@
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from '@azure/functions';
 import { validateSlackWebhook } from '../lib/slackUrl.js';
+import { validateWebPushEndpoint } from '../lib/webpushUrl.js';
 import { upsertSubscriber } from '../lib/storage.js';
 import { sha256 } from '../lib/diff.js';
 import { clientIp, consume } from '../lib/rateLimit.js';
@@ -33,10 +34,8 @@ export async function subscribe(req: HttpRequest, _ctx: InvocationContext): Prom
     const v = validateSlackWebhook(body.endpoint);
     if (!v.ok) return { status: 400, jsonBody: { error: `slack URL invalid: ${v.reason}` } };
   } else if (body.channel === 'webpush') {
-    try {
-      const u = new URL(body.endpoint);
-      if (u.protocol !== 'https:') return { status: 400, jsonBody: { error: 'webpush endpoint must be https' } };
-    } catch { return { status: 400, jsonBody: { error: 'webpush endpoint invalid URL' } }; }
+    const v = validateWebPushEndpoint(body.endpoint);
+    if (!v.ok) return { status: 400, jsonBody: { error: `webpush endpoint invalid: ${v.reason}` } };
     if (!body.p256dh || !body.auth) {
       return { status: 400, jsonBody: { error: 'p256dh and auth required for webpush' } };
     }
