@@ -13,8 +13,8 @@ test.describe('D4 sanitizer', () => {
     await page.goto('/tools/sanitizer/');
     await page.locator('textarea[data-test=input]').fill('My key: sk-FAKE12345abcdef67890hijklmnop AKIAFAKEFAKEFAKEFAKE');
     await page.locator('button[data-test=run]').click();
-    await expect(page.locator('textarea[data-test=output]')).toContainText('[REDACTED:openai-sk');
-    await expect(page.locator('textarea[data-test=output]')).toContainText('[REDACTED:aws-access');
+    await expect(page.locator('textarea[data-test=output]')).toHaveValue(/\[REDACTED:openai-sk/);
+    await expect(page.locator('textarea[data-test=output]')).toHaveValue(/\[REDACTED:aws-access/);
     await expect(page.locator('[data-test=net-badge]')).toContainText('Network: 0 requests');
     expect(externalRequests, JSON.stringify(externalRequests)).toEqual([]);
   });
