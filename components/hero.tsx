@@ -39,7 +39,7 @@ export function Hero() {
                 M. Talha Siddiqui
               </h1>
               <h2 className="font-josefin text-xl sm:text-2xl lg:text-3xl font-light text-muted-foreground mt-2">
-                AI/ML Tech Lead | Solutions Architect
+                AI/LLM Tech Lead | Solutions Architect
               </h2>
             </motion.div>
 
@@ -49,7 +49,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-muted-foreground leading-relaxed max-w-2xl"
             >
-              I am an AI/LLM leader with over 10 years of experience in software engineering, cloud architecture, and enterprise systems. Currently driving AI agent development and LLM platform strategy, with proven expertise in building production-grade conversational AI, RAG systems, and multi-agent orchestration solutions across Azure, IBM watsonx, and open-source platforms.
+              Solutions architect with over 10 years spent designing and running enterprise API and integration platforms, from gateway security and identity to cloud and DevOps. Today I lead that foundation into AI: architecting conversational AI, RAG systems, and multi-agent orchestration across Azure, IBM watsonx, and open-source models. The AI assistant on this page is one of those builds. Ask it anything about my work.
             </motion.p>
 
             <motion.div

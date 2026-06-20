@@ -21,7 +21,7 @@ export const projects: Project[] = [
       "Engineered real-time communication system leveraging Azure APIM Websockets and Azure AI Search for intelligent response routing",
       "Orchestrated ML pipeline development using Azure Cognitive Services, enabling contextual question-answering capabilities",
       "Established testing frameworks in Azure DevOps, incorporating continuous integration for rapid feature deployment",
-      "Implemented data-driven sprint management through Azure Boards & Azure Devops Connector for Excel, tracking velocity metrics and enhancement cycles",
+      "Implemented data-driven sprint management through Azure Boards and the Azure DevOps Connector for Excel, tracking velocity and enhancement cycles",
     ],
   },
   {
@@ -36,7 +36,7 @@ export const projects: Project[] = [
       "Leveraged Azure DevOps Boards and Wiki for requirements management and technical documentation",
       "Implemented testing pipelines using Azure Test Plans and Postman for performance validation",
       "Utilized Azure Application Insights for real-time system performance tracking within the chatbot codebase",
-      "Orchestrated project delivery through Azure DevOps, maintaining detailed metrics on velocity and quality KPIs using Azure Devops Dashboard",
+      "Orchestrated project delivery through Azure DevOps, tracking velocity and quality on Azure DevOps dashboards",
     ],
   },
   {
