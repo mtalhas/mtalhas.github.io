@@ -55,7 +55,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-josefin text-lg font-bold">M. Talha Siddiqui</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Experienced Software Engineer specializing in architecting cutting-edge solutions across AI, cloud, and enterprise systems.
+              AI/LLM tech lead and solutions architect bridging enterprise API platforms with applied AI across Azure, IBM watsonx, and open-source models.
             </p>
           </div>
 
@@ -95,7 +95,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-josefin text-lg font-bold">Stay Updated</h3>
             <p className="text-sm text-muted-foreground">
-              Get monthly insights on DevOps, API Design, and Azure
+              Occasional notes on AI engineering, API platforms, and cloud architecture
             </p>
             <NewsletterSignup />
           </div>

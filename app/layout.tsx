@@ -22,17 +22,17 @@ const lato = Lato({
 })
 
 export const metadata: Metadata = {
-  title: "M. Talha Siddiqui - AI/ML Tech Lead | Solutions Architect",
-  description: "AI/LLM leader with over 10 years of experience in software engineering, cloud architecture, and enterprise systems. Building production-grade AI agents, RAG systems, and multi-agent orchestration solutions.",
-  keywords: ["AI", "LLM", "Machine Learning", "Solutions Architect", "Azure OpenAI", "RAG", "Multi-Agent", "Cloud Computing", "DevOps", "API Management"],
+  title: "M. Talha Siddiqui - AI/LLM Tech Lead | Solutions Architect",
+  description: "Solutions architect with over 10 years in enterprise API and integration platforms, now leading AI engineering: conversational AI, RAG systems, and multi-agent orchestration across Azure, IBM watsonx, and open-source models.",
+  keywords: ["Solutions Architect", "API Gateway", "Layer7", "Integration Platforms", "AI Engineering", "LLM", "Azure OpenAI", "RAG", "Multi-Agent", "Cloud", "DevOps"],
   authors: [{ name: "M. Talha Siddiqui", url: "https://mtalhas.github.io" }],
   creator: "M. Talha Siddiqui",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://mtalhas.github.io",
-    title: "M. Talha Siddiqui - AI/ML Tech Lead | Solutions Architect",
-    description: "AI/LLM leader building production-grade AI agents, RAG systems, and multi-agent orchestration solutions across Azure, IBM watsonx, and open-source platforms.",
+    title: "M. Talha Siddiqui - AI/LLM Tech Lead | Solutions Architect",
+    description: "A decade in enterprise API and integration platforms, now leading AI engineering: conversational AI, RAG systems, and multi-agent orchestration across Azure, IBM watsonx, and open-source models.",
     siteName: "M. Talha Siddiqui Portfolio",
     images: [{
       url: "https://s.gravatar.com/avatar/e995c3c7d4395ab283924b105fc6f2a2?s=400",
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "M. Talha Siddiqui - Software Engineer",
-    description: "Software Engineer specializing in Azure, AI, and API Management",
+    title: "M. Talha Siddiqui - AI/LLM Tech Lead | Solutions Architect",
+    description: "AI/LLM tech lead and solutions architect bridging enterprise API platforms and AI engineering across Azure, IBM watsonx, and open-source models.",
     creator: "@mdtalhas",
     images: ["https://s.gravatar.com/avatar/e995c3c7d4395ab283924b105fc6f2a2?s=400"],
   },

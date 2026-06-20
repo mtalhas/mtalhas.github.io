@@ -1,54 +1,10 @@
 "use client"
 
-import * as React from "react"
 import { Container } from "@/components/container"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { skillCategories, skillLevelPercentages } from "@/data/skills"
-import { motion, useInView } from "framer-motion"
-
-interface SkillProgressBarProps {
-  level: keyof typeof skillLevelPercentages
-  delay: number
-}
-
-function SkillProgressBar({ level, delay }: SkillProgressBarProps) {
-  const ref = React.useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const percentage = skillLevelPercentages[level]
-
-  const getColorClass = () => {
-    switch (level) {
-      case "Expert":
-        return "bg-green-500"
-      case "Advanced":
-        return "bg-blue-500"
-      case "Proficient":
-        return "bg-yellow-500"
-      case "Competent":
-        return "bg-orange-500"
-      default:
-        return "bg-gray-500"
-    }
-  }
-
-  return (
-    <div ref={ref} className="space-y-2">
-      <div className="flex justify-between text-sm">
-        <span className="font-medium">{level}</span>
-        <span className="text-muted-foreground">{percentage}%</span>
-      </div>
-      <div className="h-2 bg-muted rounded-full overflow-hidden">
-        <motion.div
-          className={`h-full ${getColorClass()} rounded-full`}
-          initial={{ width: 0 }}
-          animate={isInView ? { width: `${percentage}%` } : { width: 0 }}
-          transition={{ duration: 1, delay, ease: "easeOut" }}
-        />
-      </div>
-    </div>
-  )
-}
+import { skillCategories } from "@/data/skills"
+import { motion } from "framer-motion"
 
 export function SkillsSection() {
   return (
@@ -65,7 +21,7 @@ export function SkillsSection() {
             Skills & Expertise
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Technical competencies across development, DevOps, and architecture
+            The stack I design, build, and lead with across AI, integration platforms, cloud, and architecture
           </p>
         </motion.div>
 
@@ -83,7 +39,6 @@ export function SkillsSection() {
                   <CardTitle className="font-josefin text-lg">
                     {category.category}
                   </CardTitle>
-                  <SkillProgressBar level={category.level} delay={index * 0.1 + 0.3} />
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">

@@ -1,56 +1,54 @@
 export interface SkillCategory {
   category: string
-  level: "Expert" | "Advanced" | "Proficient" | "Competent"
   skills: string[]
 }
 
+// Capability groups, intentionally unrated. Seniority is signalled by the
+// breadth and specificity of the stack, not by self-assigned percentages.
 export const skillCategories: SkillCategory[] = [
   {
-    category: "AI & LLM",
-    level: "Advanced",
-    skills: ["Azure OpenAI", "RAG Systems", "Multi-Agent Orchestration", "Prompt Engineering", "IBM watsonx"],
+    category: "AI & LLM Engineering",
+    skills: [
+      "Azure OpenAI",
+      "RAG Systems",
+      "Multi-Agent Orchestration",
+      "Prompt Engineering",
+      "Model Evaluation",
+      "IBM watsonx",
+    ],
   },
   {
-    category: "Web Development",
-    level: "Expert",
-    skills: ["Python", "ASP.NET", "Javascript"],
+    category: "API & Integration Platforms",
+    skills: [
+      "Layer7 API Gateway",
+      "OAuth 2.0 / OIDC",
+      "REST API Design",
+      "SCIM",
+      "API Security",
+      "Reverse Proxy Architecture",
+    ],
   },
   {
-    category: "DevOps",
-    level: "Advanced",
-    skills: ["Terraform", "AWS", "Azure"],
+    category: "Cloud & DevOps",
+    skills: ["Azure", "AWS", "Terraform", "Docker", "Kubernetes", "CI/CD", "Azure DevOps"],
   },
   {
-    category: "Software Architecture",
-    level: "Advanced",
-    skills: ["Scalability", "Modularity", "Resilience", "API design", "Performance"],
+    category: "Languages & Frameworks",
+    skills: ["Python", "TypeScript / JavaScript", "ASP.NET", "React", "Bash", "Groovy"],
   },
   {
-    category: "Software Development",
-    level: "Proficient",
-    skills: ["Sustainability", "Portability", "Scalability"],
+    category: "Observability & Reliability",
+    skills: ["Azure Monitor", "Application Insights", "ELK / Kibana", "JMeter", "Postman"],
   },
   {
-    category: "Problem Solving",
-    level: "Advanced",
-    skills: ["Troubleshooting", "Root Cause Analysis", "Debugging", "Optimization"],
-  },
-  {
-    category: "Draft documentation",
-    level: "Proficient",
-    skills: ["docsify", "Github", "MARP", "Joplin", "MermaidJS", "Form.IO"],
-  },
-  {
-    category: "Communication",
-    level: "Competent",
-    skills: ["face-2-face", "emails", "presentations", "layman conversions", "1:1s"],
+    category: "Architecture & Delivery",
+    skills: [
+      "Solution Architecture",
+      "Scalability",
+      "Resilience",
+      "Secure SDLC",
+      "Performance",
+      "Technical Documentation",
+    ],
   },
 ]
-
-// Skill level percentages for progress bars
-export const skillLevelPercentages = {
-  Expert: 95,
-  Advanced: 80,
-  Proficient: 65,
-  Competent: 50,
-}
