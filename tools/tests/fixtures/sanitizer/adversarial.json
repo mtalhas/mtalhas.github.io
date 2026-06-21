@@ -1,0 +1,5 @@
+{
+  "splitLine": "sk-abc123\ndef456ghi789jkl012mno345pq",
+  "deeplyNested": {"a":{"b":{"c":{"d":{"e":"AKIAFAKEFAKEFAKEFAKE"}}}}},
+  "escapeSequence": "{\"key\":\"sk-abc123def456ghi789jkl012mno345pq\"}"
+}

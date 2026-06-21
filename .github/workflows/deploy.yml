@@ -38,6 +38,19 @@ jobs:
           NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
           NEXT_PUBLIC_CLARITY_PROJECT_ID: ${{ secrets.CLARITY_PROJECT_ID }}
 
+      - name: Install tools deps
+        working-directory: tools
+        run: npm ci
+
+      - name: Build Astro tools app
+        working-directory: tools
+        run: npm run build
+
+      - name: Merge Astro dist into Next out/tools/
+        run: |
+          mkdir -p out/tools
+          cp -R tools/dist/. out/tools/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

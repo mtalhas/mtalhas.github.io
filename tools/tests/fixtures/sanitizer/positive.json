@@ -1,0 +1,59 @@
+{
+  "apiKeys": {
+    "openaiSk": [
+      "sk-abc123def456ghi789jkl012mno345pq",
+      "sk-FAKEzzzzzzzzzzzzzzzzzzzzzzzz",
+      "sk-test_FAKE_000000000000000000000000"
+    ],
+    "stripePk": [
+      "pk_test_FAKE000000000000000000000000",
+      "pk_live_FAKE000000000000000000000000",
+      "pk_FAKEFAKEsk123abc456"
+    ],
+    "githubPat": [
+      "ghp_FAKEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "ghp_FAKEbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "ghp_FAKEcccccccccccccccccccccccccccccccc"
+    ],
+    "slackBot": [
+      "xoxb-FAKE-1234567890-abcdefghijkl",
+      "xoxp-FAKE-9876543210-zyxwvutsrqpon",
+      "xoxa-FAKE-1111111111-mnopqrstuvwx"
+    ],
+    "awsAccess": [
+      "AKIAFAKEFAKEFAKEFAKE",
+      "AKIAIOSFODNN7EXAMPLE",
+      "AKIAFAKE1234567890AB"
+    ],
+    "googleApi": [
+      "AIzaFAKEFAKEFAKEFAKEFAKEFAKEFAKEFAKE123",
+      "AIzaSyDeMOFAKEKEYabcdefghijklmnopqrstuv",
+      "AIzaFAKE0000000000000000000000000000xxx"
+    ],
+    "googleOauth": [
+      "ya29.FAKE-token-aaaaaaaaaa",
+      "ya29.FAKE-token-bbbbbbbbbb",
+      "ya29.FAKE-token-cccccccccc"
+    ],
+    "gitlab": [
+      "glpat-FAKEglpat1234567890ab",
+      "glpat-FAKEzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+      "glpat-FAKEaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "anthropicPat": [
+      "pat_FAKEpat000000000000000000000000",
+      "pat_FAKEpat111111111111111111111111",
+      "pat_FAKEpat222222222222222222222222"
+    ]
+  },
+  "jwts": [
+    "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWtlIn0.FAKEsignature",
+    "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJmYWtlIn0.AnotherFAKEsignature",
+    "eyJ0eXAiOiJKV1QifQ.eyJleHAiOjB9.ThirdFAKEsig"
+  ],
+  "emails": ["user@example.com", "first.last+tag@sub.domain.co.uk", "fake.dev@protonmail.com"],
+  "phones": ["+14155551234", "(415) 555-1234", "+44 20 7946 0958"],
+  "ipv4": ["192.0.2.45", "203.0.113.1", "10.0.0.1"],
+  "ipv6": ["2001:db8::1", "fe80::1ff:fe23:4567:890a", "abcd:ef01:2345:6789:abcd:ef01:2345:6789"],
+  "uuids": ["550e8400-e29b-41d4-a716-446655440000", "00000000-0000-4000-8000-000000000000", "f47ac10b-58cc-4372-a567-0e02b2c3d479"]
+}

@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import ToolCard from '../components/ToolCard.astro';
+
+const tools = [
+  { slug: 'sanitizer', name: 'Agent Trace Sanitizer',
+    blurb: 'Paste an AI debug log. Strip secrets in your browser. Copy a clean issue body.' },
+  { slug: 'mcpmeter', name: 'MCPMeter',
+    blurb: 'Paste your claude_desktop_config.json. See per-server token cost per turn.' }
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'Are these tools free?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. They run entirely in your browser.' } },
+    { '@type': 'Question', name: 'Does any of my pasted content leave the browser?',
+      acceptedAnswer: { '@type': 'Answer', text: 'No. The sanitizer and MCPMeter both process input locally with zero outbound network calls. The hub page does not collect analytics on tool routes.' } },
+    { '@type': 'Question', name: 'Who built these?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Talha Siddiqui. You can book a 30 minute call at cal.com/mtalhas/30min.' } }
+  ]
+};
+---
+<Base title="mtalhas tools" description="Browser only utilities for AI engineers: trace sanitizer and MCP token meter." jsonLd={faqJsonLd}>
+  <section class="container">
+    <h1>mtalhas tools</h1>
+    <p>Browser only utilities for people shipping AI systems. No login. No telemetry on tool routes.</p>
+    <div class="grid grid-tools" style="margin-top: 1.5rem;">
+      {tools.map(t => <ToolCard slug={t.slug} name={t.name} blurb={t.blurb} />)}
+    </div>
+  </section>
+</Base>

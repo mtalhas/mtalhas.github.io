@@ -1,0 +1,12 @@
+# mtalhas.github.io/tools
+# Crawl policy for AI assistants
+User-agent: GPTBot
+Allow: /tools/
+
+User-agent: ClaudeBot
+Allow: /tools/
+
+User-agent: PerplexityBot
+Allow: /tools/
+
+Sitemap: https://mtalhas.github.io/sitemap.xml

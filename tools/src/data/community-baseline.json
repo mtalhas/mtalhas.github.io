@@ -1,0 +1,12 @@
+{
+  "updated": "2026-05-27",
+  "note": "Hand-curated samples. NOT collected from users (privacy promise). Refresh by editing this file.",
+  "samples": [
+    { "name": "Bare Claude Desktop",             "tokensPerTurn":  1200 },
+    { "name": "Claude Desktop + filesystem",     "tokensPerTurn":  2600 },
+    { "name": "Claude Desktop + GitHub + Slack", "tokensPerTurn":  8400 },
+    { "name": "Heavy power user (10+ servers)",  "tokensPerTurn": 19000 }
+  ],
+  "median": 5500,
+  "p90": 16000
+}

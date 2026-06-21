@@ -1,0 +1,83 @@
+---
+import Base from '../../layouts/Base.astro';
+// Per-route CSP is locked down: no outbound connections of any kind.
+const cspExtra = "connect-src 'none'";
+// Inline counter installed BEFORE any other script. Wraps fetch, XHR, sendBeacon,
+// EventSource, and WebSocket. Image src is blocked by CSP's img-src 'self' data:.
+const netWrapper = `
+<script>
+(function(){
+  var n = 0;
+  function bump(){ n++; try { document.querySelectorAll('[data-test=net-badge]').forEach(function(el){ el.textContent = 'Network: ' + n + ' requests'; }); } catch(e){} }
+  if (typeof window.fetch === 'function') {
+    var of = window.fetch.bind(window);
+    window.fetch = function(){ bump(); return of.apply(this, arguments); };
+  }
+  if (typeof XMLHttpRequest !== 'undefined') {
+    var oo = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(){ bump(); return oo.apply(this, arguments); };
+  }
+  if (navigator && typeof navigator.sendBeacon === 'function') {
+    var ob = navigator.sendBeacon.bind(navigator);
+    navigator.sendBeacon = function(){ bump(); return ob.apply(this, arguments); };
+  }
+  if (typeof WebSocket !== 'undefined') {
+    var OW = WebSocket;
+    window.WebSocket = function(){ bump(); return new OW(arguments[0], arguments[1]); };
+    window.WebSocket.prototype = OW.prototype;
+  }
+  if (typeof EventSource !== 'undefined') {
+    var OE = EventSource;
+    window.EventSource = function(){ bump(); return new OE(arguments[0], arguments[1]); };
+    window.EventSource.prototype = OE.prototype;
+  }
+  window.__netCount = function(){ return n; };
+})();
+</script>
+`;
+---
+<Base
+  title="Agent Trace Sanitizer"
+  description="Browser only. Paste an AI trace. Strip secrets. Copy a clean issue body."
+  cspExtra={cspExtra}
+  noAnalytics={true}
+  preInsert={netWrapper}
+>
+  <section class="container stack" data-island="sanitizer">
+    <h1>Agent Trace Sanitizer</h1>
+    <p>Paste a trace. A deterministic regex pack runs in your browser. Nothing leaves this page.</p>
+    <p><strong data-test="net-badge">Network: 0 requests</strong></p>
+
+    <label for="san-in">Input</label>
+    <textarea id="san-in" data-test="input" rows="10" style="width:100%" aria-describedby="san-in-help"></textarea>
+    <p id="san-in-help" class="muted" style="margin-top:-0.5rem">Plain text, JSON, Markdown, or OpenAI/Anthropic/LangChain trace JSON.</p>
+
+    <details>
+      <summary>Custom regex list (one per line, JavaScript syntax)</summary>
+      <textarea data-test="custom" rows="3" style="width:100%" placeholder="\\bACME-\\d{6}\\b" aria-label="Custom regexes"></textarea>
+    </details>
+    <details>
+      <summary>Denylist of literal terms (one per line)</summary>
+      <textarea data-test="deny" rows="3" style="width:100%" placeholder="MyCompany" aria-label="Denylist terms"></textarea>
+    </details>
+    <p>
+      <label><input type="checkbox" data-test="uuid-toggle" /> Also redact UUIDs (off by default; sometimes meaningful)</label>
+    </p>
+
+    <p>
+      <button data-test="run" class="cta">Sanitize</button>
+      <button data-test="copy-issue" class="cta secondary">Copy as GitHub issue</button>
+    </p>
+
+    <p role="status" aria-live="polite" data-test="status" class="muted"></p>
+
+    <label for="san-out">Output</label>
+    <textarea id="san-out" data-test="output" rows="10" style="width:100%" readonly aria-label="Sanitized output"></textarea>
+  </section>
+
+  <script>
+    import { mount } from '../../islands/SanitizerApp';
+    const root = document.querySelector('[data-island=sanitizer]');
+    if (root) mount(root as HTMLElement);
+  </script>
+</Base>
