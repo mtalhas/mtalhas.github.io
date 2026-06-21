@@ -21,17 +21,17 @@ const lato = Lato({
 })
 
 export const metadata: Metadata = {
-  title: "M. Talha Siddiqui - AI/ML Tech Lead | Solutions Architect",
-  description: "AI/LLM leader with over 10 years of experience in software engineering, cloud architecture, and enterprise systems. Building production-grade AI agents, RAG systems, and multi-agent orchestration solutions.",
-  keywords: ["AI", "LLM", "Machine Learning", "Solutions Architect", "Azure OpenAI", "RAG", "Multi-Agent", "Cloud Computing", "DevOps", "API Management"],
+  title: "M. Talha Siddiqui - AI/LLM Tech Lead | Solutions Architect",
+  description: "Hands-on AI/LLM engineer and technical lead with 10+ years across software, cloud, and enterprise systems. Builds production agentic systems, RAG pipelines, multi-agent orchestration, and regulated-cloud AI platforms on Azure.",
+  keywords: ["AI Engineer", "LLM", "Agentic AI", "Multi-Agent Orchestration", "LangGraph", "RAG", "LLM Evaluation", "MCP", "Azure OpenAI", "Azure AI Foundry", "Machine Learning", "Solutions Architect", "Cloud", "DevOps"],
   authors: [{ name: "M. Talha Siddiqui", url: "https://mtalhas.github.io" }],
   creator: "M. Talha Siddiqui",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://mtalhas.github.io",
-    title: "M. Talha Siddiqui - AI/ML Tech Lead | Solutions Architect",
-    description: "AI/LLM leader building production-grade AI agents, RAG systems, and multi-agent orchestration solutions across Azure, IBM watsonx, and open-source platforms.",
+    title: "M. Talha Siddiqui - AI/LLM Tech Lead | Solutions Architect",
+    description: "Hands-on AI/LLM engineer and technical lead building production agentic systems, RAG pipelines, and multi-agent orchestration across Azure, IBM watsonx, and open-source platforms.",
     siteName: "M. Talha Siddiqui Portfolio",
     images: [{
       url: "https://s.gravatar.com/avatar/e995c3c7d4395ab283924b105fc6f2a2?s=400",
