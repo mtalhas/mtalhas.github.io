@@ -448,13 +448,21 @@ header .sub { font-size: 11.5px; opacity: 0.7; margin-top: 1px; }
   function setStickyCta(url, label) {
     if (!url) {
       ctaBar.classList.remove('show');
-      ctaBar.innerHTML = '';
+      ctaBar.replaceChildren();
       stickyCtaUrl = null;
       return;
     }
+    let safe;
+    try { safe = new URL(url, location.origin); } catch (e) { return; }
+    if (safe.protocol !== 'https:') return;
     if (stickyCtaUrl === url) return;
     stickyCtaUrl = url;
-    ctaBar.innerHTML = `<a href="${url}" target="_blank" rel="noopener">${escapeHtml(label || 'Book a 15-min call')}</a>`;
+    const a = document.createElement('a');
+    a.href = safe.href;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = label || 'Book a 15-min call';
+    ctaBar.replaceChildren(a);
     ctaBar.classList.add('show');
   }
 
@@ -597,7 +605,14 @@ header .sub { font-size: 11.5px; opacity: 0.7; margin-top: 1px; }
   function linkify(htmlEscapedText) {
     return htmlEscapedText.replace(
       /(https?:\/\/[^\s<]+)/g,
-      (m) => `<a href="${m}" target="_blank" rel="noopener">${m}</a>`
+      (m) => {
+        // m is already HTML-escaped; only linkify genuine http(s) URLs
+        try {
+          const u = new URL(m.replace(/&amp;/g, '&'));
+          if (u.protocol !== 'http:' && u.protocol !== 'https:') return m;
+        } catch (e) { return m; }
+        return `<a href="${m}" target="_blank" rel="noopener">${m}</a>`;
+      }
     );
   }
 })();
