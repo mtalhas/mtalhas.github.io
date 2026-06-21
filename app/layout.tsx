@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 import { Josefin_Sans, Lato } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -22,8 +23,8 @@ const lato = Lato({
 
 export const metadata: Metadata = {
   title: "M. Talha Siddiqui - AI/LLM Tech Lead | Solutions Architect",
-  description: "Hands-on AI/LLM engineer and technical lead with 10+ years across software, cloud, and enterprise systems. Builds production agentic systems, RAG pipelines, multi-agent orchestration, and regulated-cloud AI platforms on Azure.",
-  keywords: ["AI Engineer", "LLM", "Agentic AI", "Multi-Agent Orchestration", "LangGraph", "RAG", "LLM Evaluation", "MCP", "Azure OpenAI", "Azure AI Foundry", "Machine Learning", "Solutions Architect", "Cloud", "DevOps"],
+  description: "Solutions architect with over 10 years in enterprise API and integration platforms, now leading AI engineering: conversational AI, RAG systems, and multi-agent orchestration across Azure, IBM watsonx, and open-source models.",
+  keywords: ["Solutions Architect", "AI Engineer", "AI Engineering", "Agentic AI", "Multi-Agent Orchestration", "LangGraph", "LLM", "LLM Evaluation", "RAG", "MCP", "Azure OpenAI", "Azure AI Foundry", "API Gateway", "Layer7", "Integration Platforms", "Cloud", "DevOps"],
   authors: [{ name: "M. Talha Siddiqui", url: "https://mtalhas.github.io" }],
   creator: "M. Talha Siddiqui",
   openGraph: {
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://mtalhas.github.io",
     title: "M. Talha Siddiqui - AI/LLM Tech Lead | Solutions Architect",
-    description: "Hands-on AI/LLM engineer and technical lead building production agentic systems, RAG pipelines, and multi-agent orchestration across Azure, IBM watsonx, and open-source platforms.",
+    description: "A decade in enterprise API and integration platforms, now leading AI engineering: conversational AI, RAG systems, and multi-agent orchestration across Azure, IBM watsonx, and open-source models.",
     siteName: "M. Talha Siddiqui Portfolio",
     images: [{
       url: "https://s.gravatar.com/avatar/e995c3c7d4395ab283924b105fc6f2a2?s=400",
@@ -42,8 +43,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "M. Talha Siddiqui - Software Engineer",
-    description: "Software Engineer specializing in Azure, AI, and API Management",
+    title: "M. Talha Siddiqui - AI/LLM Tech Lead | Solutions Architect",
+    description: "AI/LLM tech lead and solutions architect bridging enterprise API platforms and AI engineering across Azure, IBM watsonx, and open-source models.",
     creator: "@mdtalhas",
     images: ["https://s.gravatar.com/avatar/e995c3c7d4395ab283924b105fc6f2a2?s=400"],
   },
@@ -78,6 +79,13 @@ export default function RootLayout({
           <Toaster />
         </ThemeProvider>
         <Analytics />
+        <Script
+          src="/chatbot/chatbot.js"
+          strategy="lazyOnload"
+          data-chat-endpoint="https://func-mtalhas-chat-prod-fx.azurewebsites.net/api"
+          data-cal-15="https://cal.com/mtalhas/15min?utm_source=chatbot&utm_medium=site&utm_campaign=portfolio"
+          data-cal-30="https://cal.com/mtalhas/30min?utm_source=chatbot&utm_medium=site&utm_campaign=portfolio"
+        />
       </body>
     </html>
   )

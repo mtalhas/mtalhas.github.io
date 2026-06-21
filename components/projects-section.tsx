@@ -23,7 +23,7 @@ export function ProjectsSection() {
             Featured Projects
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Key projects showcasing expertise in Azure AI, API Management, and enterprise solutions
+            Representative engagements across AI, API integration platforms, and enterprise architecture. Client details are kept under NDA.
           </p>
         </motion.div>
 
