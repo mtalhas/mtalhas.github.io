@@ -24,7 +24,7 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "M. Talha Siddiqui - AI/LLM Tech Lead | Solutions Architect",
   description: "Solutions architect with over 10 years in enterprise API and integration platforms, now leading AI engineering: conversational AI, RAG systems, and multi-agent orchestration across Azure, IBM watsonx, and open-source models.",
-  keywords: ["Solutions Architect", "API Gateway", "Layer7", "Integration Platforms", "AI Engineering", "LLM", "Azure OpenAI", "RAG", "Multi-Agent", "Cloud", "DevOps"],
+  keywords: ["Solutions Architect", "AI Engineer", "AI Engineering", "Agentic AI", "Multi-Agent Orchestration", "LangGraph", "LLM", "LLM Evaluation", "RAG", "MCP", "Azure OpenAI", "Azure AI Foundry", "API Gateway", "Layer7", "Integration Platforms", "Cloud", "DevOps"],
   authors: [{ name: "M. Talha Siddiqui", url: "https://mtalhas.github.io" }],
   creator: "M. Talha Siddiqui",
   openGraph: {
