@@ -4,6 +4,11 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, and Ta
 
 🌐 **Live Site**: [https://mtalhas.github.io](https://mtalhas.github.io)
 
+## Source of Truth
+
+- **Azure DevOps**: [openworkshop/PiLabs/mtalhas.github.io](https://dev.azure.com/openworkshop/PiLabs/_git/mtalhas.github.io) holds the code, pull requests and builds. It is the owner's private working repo.
+- **GitHub**: `main` is a mirror, written only by the Azure Pipelines `mirror-site` pipeline.
+
 ## ✨ Features
 
 - **Modern Tech Stack**: Next.js 15, React 19, TypeScript, Tailwind CSS
@@ -167,8 +172,9 @@ To add MailerLite:
 
 1. Enable GitHub Pages in repository settings
 2. Set source to "GitHub Actions"
-3. Push to `main` branch
-4. Workflow will build and deploy automatically
+3. Complete a pull request to `main` in Azure DevOps
+4. The `mirror-site` pipeline pushes `main` to GitHub
+5. Workflow will build and deploy automatically
 
 ### Custom Domain
 
