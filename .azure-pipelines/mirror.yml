@@ -1,0 +1,32 @@
+# Mirrors ADO main to GitHub main (one way, fast-forward only). Goes to .azure-pipelines/mirror.yml.
+# Safeguards: (1) a Branch control check on the secure file ado-mirror-site allows refs/heads/main only
+# (set in the ADO UI, not in this file); (2) the push step has its own branch condition and an ancestor check (HEAD must be on ADO main); (3) no --force,
+# so a diverged GitHub main fails the run instead of being overwritten.
+trigger:
+  branches:
+    include:
+      - main
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    fetchDepth: 0
+    persistCredentials: false
+
+  - task: InstallSSHKey@0
+    displayName: Install GitHub deploy key
+    inputs:
+      # GitHub's published Ed25519 host key (docs.github.com, checked 2026-11-14)
+      knownHostsEntry: 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl'
+      sshKeySecureFile: ado-mirror-site
+
+  - script: git merge-base --is-ancestor HEAD origin/main
+    displayName: Refuse a commit that is not on ADO main (guards a run queued for another commit)
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+
+  - script: git push git@github.com:mtalhas/mtalhas.github.io.git HEAD:refs/heads/main
+    displayName: Push main to GitHub (fast-forward only)
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))

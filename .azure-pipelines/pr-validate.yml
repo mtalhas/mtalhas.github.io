@@ -1,0 +1,21 @@
+# PR validation for the site. Goes to .azure-pipelines/pr-validate.yml. Queued only by the branch
+# policy "pr-validate" on main (Azure Repos has no YAML PR trigger). Built without .env.local or keys.
+trigger: none
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+
+  - task: NodeTool@0
+    displayName: Node 20
+    inputs:
+      versionSpec: '20.x'
+
+  - script: npm ci
+    displayName: Install
+
+  - script: npm run build
+    displayName: Build (type-checks)
